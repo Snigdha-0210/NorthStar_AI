@@ -12,7 +12,7 @@ export default function OnboardingPage() {
       <Card className="border-primary/20 shadow-lg">
         <CardHeader className="text-center pb-8 pt-10">
           <CardTitle className="text-3xl mb-2">Welcome to MentorAI</CardTitle>
-          <CardDescription className="text-base">Let's set up your digital career twin in 3 easy steps.</CardDescription>
+          <CardDescription className="text-base">Let&apos;s set up your digital career twin in 3 easy steps.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4 px-10">
           <div className="p-4 border rounded-xl bg-primary/5 flex items-start gap-4">
@@ -21,7 +21,7 @@ export default function OnboardingPage() {
             </div>
             <div>
               <h3 className="font-semibold text-lg mb-1">Step 1: Upload your resume</h3>
-              <p className="text-sm text-muted-foreground">We'll parse your skills and experience automatically to build your baseline career twin.</p>
+              <p className="text-sm text-muted-foreground">We&apos;ll parse your skills and experience automatically to build your baseline career twin.</p>
             </div>
           </div>
           

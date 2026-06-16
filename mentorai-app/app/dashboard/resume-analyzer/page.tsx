@@ -1,5 +1,5 @@
 "use client";
-import { useAppStore } from "@/store/useAppStore";
+
 import { ResumeScoreCard } from "@/components/features/ResumeScoreCard";
 import { mockResumeScore } from "@/services/mockData";
 import { Button } from "@/components/ui/button";

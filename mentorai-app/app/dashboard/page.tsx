@@ -1,10 +1,6 @@
 "use client";
 
-import { useAppStore } from "@/store/useAppStore";
-import Link from "next/link";
-
 export default function DashboardPage() {
-  const { user } = useAppStore();
 
   return (
     <>

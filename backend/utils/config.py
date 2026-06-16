@@ -1,5 +1,5 @@
 import os
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = "MentorAI"
@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7 # 7 days
     
     # Database
-    DATABASE_URL: str = "postgresql+asyncpg://mentorai_user:mentorai_password@localhost:5432/mentorai_db"
+    DATABASE_URL: str = "sqlite+aiosqlite:///./mentorai.db"
     
     # ChromaDB
     CHROMA_HOST: str = "localhost"
@@ -21,7 +21,6 @@ class Settings(BaseSettings):
     # OpenAI
     OPENAI_API_KEY: str = ""
 
-    class Config:
-        env_file = ".env"
+    model_config = SettingsConfigDict(env_file=".env.local", extra="ignore")
 
 settings = Settings()

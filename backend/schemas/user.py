@@ -6,10 +6,11 @@ class UserBase(BaseModel):
     email: EmailStr
 
 class UserCreate(UserBase):
-    password: str
+    firebase_uid: str
 
 class UserResponse(UserBase):
     id: int
+    firebase_uid: str
     is_active: bool
     created_at: datetime
 
