@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Career Twin | MentorAI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&amp;family=Inter:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        @font-face {
+            font-family: 'Hanken Grotesk';
+            font-style: normal;
+            font-weight: 400 700;
+            font-display: swap;
+            src: url(https://fonts.gstatic.com/s/hankengrotesk/v2/X9hoeTM6l8S4_wGz7pX8f4R_.woff2) format('woff2');
+        }
+
+        body {
+            background-color: #0A0A0A;
+            color: #e2e2e2;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(30, 30, 30, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .glow-orange {
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.15);
+        }
+
+        .glow-amber {
+            box-shadow: 0 0 20px rgba(255, 183, 3, 0.15);
+        }
+
+        .orbit-container {
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .orbit-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotateX(60deg);
+            border: 1px dashed rgba(255, 183, 3, 0.2);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .skill-decay-bar {
+            background: linear-gradient(90deg, #ff6b35 0%, #93000a 100%);
+        }
+
+        .mesh-gradient {
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(18, 100%, 61%, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(43, 100%, 50%, 0.1) 0px, transparent 50%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#e2e2e2",
+                        "tertiary-fixed-dim": "#4ae183",
+                        "surface-container-highest": "#333535",
+                        "surface-dim": "#121414",
+                        "on-primary": "#5d1900",
+                        "error": "#ffb4ab",
+                        "surface-container": "#1e2020",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-fixed": "#390c00",
+                        "on-tertiary-fixed": "#00210c",
+                        "inverse-surface": "#e2e2e2",
+                        "surface-bright": "#38393a",
+                        "on-secondary-container": "#694900",
+                        "background": "#121414",
+                        "outline": "#a98a80",
+                        "on-tertiary": "#003919",
+                        "secondary-container": "#fbb400",
+                        "secondary": "#ffd795",
+                        "primary-fixed-dim": "#ffb59d",
+                        "surface-container-lowest": "#0c0f0f",
+                        "surface": "#121414",
+                        "primary-fixed": "#ffdbd0",
+                        "on-tertiary-fixed-variant": "#005228",
+                        "on-error": "#690005",
+                        "secondary-fixed-dim": "#ffba27",
+                        "on-surface-variant": "#e1bfb5",
+                        "primary-container": "#ff6b35",
+                        "outline-variant": "#594139",
+                        "on-primary-container": "#5f1900",
+                        "on-background": "#e2e2e2",
+                        "tertiary-container": "#00b15c",
+                        "surface-tint": "#ffb59d",
+                        "surface-container-high": "#282a2b",
+                        "surface-container-low": "#1a1c1c",
+                        "secondary-fixed": "#ffdea9",
+                        "on-secondary-fixed": "#271900",
+                        "on-primary-fixed-variant": "#832600",
+                        "surface-variant": "#333535",
+                        "on-tertiary-container": "#003b1a",
+                        "on-secondary-fixed-variant": "#5e4100",
+                        "on-secondary": "#422c00",
+                        "inverse-on-surface": "#2f3131",
+                        "tertiary": "#4ae183",
+                        "primary": "#ffb59d",
+                        "inverse-primary": "#ab3500",
+                        "tertiary-fixed": "#6bfe9c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "container-max": "1440px",
+                        "unit": "8px",
+                        "section-gap": "120px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["JetBrains Mono"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.08em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "headline-lg": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="mesh-gradient min-h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl dark:bg-surface-container/80 border-b border-white/5 shadow-sm">
+<div class="flex justify-between items-center px-gutter py-4 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">MentorAI</span>
+<div class="hidden md:flex gap-6">
+<a class="text-on-surface-variant font-medium hover:bg-white/5 transition-colors px-3 py-1 rounded" href="#">Dashboard</a>
+<a class="text-primary font-bold border-b-2 border-primary px-3 py-1" href="#">Career Twin</a>
+<a class="text-on-surface-variant font-medium hover:bg-white/5 transition-colors px-3 py-1 rounded" href="#">Roadmaps</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="bg-surface-container-lowest border-none rounded-full py-2 pl-10 pr-4 text-label-md font-label-md focus:ring-1 focus:ring-primary w-64" placeholder="Search insights..." type="text"/>
+</div>
+<span class="material-symbols-outlined text-primary cursor-pointer active:scale-95 duration-200">account_balance_wallet</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer active:scale-95 duration-200">notifications</span>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20">
+<img class="w-full h-full object-cover" data-alt="Close-up professional portrait of a tech executive in a dark environment with soft cinematic lighting on the side of the face. The background is a blurred high-tech workspace with subtle amber light accents. The image quality is crisp and high-end, fitting a premium SaaS dashboard aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFFgBSuJJaS821rlTFKjVgKk7r06XA69URHP6DbQjm9IcC5AoExC2KwzpoWP740RUjeyxlND5-c5ZDxB8mbxdWvF_tq87AdBXC5q4LfxPWT6Kg1Md-B-y1_FYdGchGqOvKnWnvCd4gNjrC7EEexwmropSaiA7wOsDg8FKmFoQLtO5ADvpLrLIWBqXTBSKwtb_KCxrOhJlqIwGPZa1gf8fwTBhRPTx_lMlYaUKzHVSCStEW4Z0hYRWDJPRQPfd7d-I1-WF4fSc47kJW"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-surface-container dark:bg-surface-container-low border-r border-white/5 shadow-xl hidden lg:flex flex-col p-unit pt-24 z-40">
+<div class="flex items-center gap-3 px-4 mb-8">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary">psychology</span>
+</div>
+<div>
+<div class="font-headline-md text-headline-md font-bold text-primary">MentorAI</div>
+<div class="font-label-md text-label-md text-on-surface-variant -mt-1 uppercase tracking-widest">Career OS</div>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-white/10 transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg font-bold" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Career Twin</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-white/10 transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">explore</span>
+<span class="font-label-md text-label-md">Career Discovery</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-white/10 transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">map</span>
+<span class="font-label-md text-label-md">Roadmaps</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-white/10 transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">library_books</span>
+<span class="font-label-md text-label-md">Resources</span>
+</a>
+<div class="my-4 border-t border-white/5"></div>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-white/10 transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-300">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto p-4">
+<div class="bg-gradient-to-br from-primary/20 to-secondary/10 rounded-xl p-4 border border-primary/20">
+<p class="font-label-sm text-label-sm text-primary mb-2">PRO FEATURES</p>
+<p class="font-body-md text-body-md text-on-surface mb-4">Unlock 10-year AI simulation</p>
+<button class="w-full bg-primary text-on-primary py-2 rounded-lg font-bold text-label-md active:scale-95 duration-200">Upgrade to Pro</button>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:ml-64 pt-24 pb-12 px-margin-mobile md:px-margin-desktop min-h-screen">
+<div class="max-w-container-max mx-auto">
+<!-- Header Section -->
+<header class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-surface mb-2">AI Career Twin</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Visualizing your professional trajectory through a real-time predictive mirror. Compare your current trajectory with your optimized potential.</p>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-3 border border-secondary text-secondary rounded-xl font-bold flex items-center gap-2 hover:bg-secondary/5 transition-colors">
+<span class="material-symbols-outlined">refresh</span>
+                        Re-Simulate
+                    </button>
+<button class="px-6 py-3 bg-primary text-on-primary rounded-xl font-bold glow-orange flex items-center gap-2 active:scale-95 duration-200">
+<span class="material-symbols-outlined">bolt</span>
+                        Optimize Path
+                    </button>
+</div>
+</header>
+<!-- Comparison Bento Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- The Mirror Comparison (Visual Anchor) -->
+<div class="lg:col-span-8 glass-card rounded-xl p-8 relative overflow-hidden h-[500px]">
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+
+</div>
+<div class="relative z-10 flex flex-col h-full">
+<div class="flex justify-between items-start mb-8">
+<h2 class="font-headline-md text-headline-md text-on-surface">Predictive Trajectory Mirror</h2>
+<div class="flex gap-4">
+<span class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant"><span class="w-3 h-3 rounded-full bg-white/20"></span> Current Path</span>
+<span class="flex items-center gap-2 font-label-md text-label-md text-primary"><span class="w-3 h-3 rounded-full bg-primary glow-orange"></span> Optimized Path</span>
+</div>
+</div>
+<!-- 3D Graph Mockup -->
+<div class="flex-1 flex items-end justify-between gap-4 px-4 pb-4">
+<!-- Bars & Nodes Simulation -->
+<div class="flex-1 flex items-end gap-1 sm:gap-2 h-full relative">
+<!-- Vertical Axis -->
+<div class="absolute left-0 h-full w-px bg-white/10 flex flex-col justify-between text-[10px] text-on-surface-variant/40 font-label-sm py-4">
+<span>$350k</span>
+<span>$280k</span>
+<span>$210k</span>
+<span>$140k</span>
+<span>$70k</span>
+</div>
+<!-- Simulation Columns -->
+<div class="flex-1 flex items-end gap-1 md:gap-4 ml-8 h-full">
+<!-- Year nodes -->
+<div class="flex-1 flex flex-col justify-end items-center gap-1 group">
+<div class="w-full bg-white/5 h-16 rounded-t-lg transition-all group-hover:bg-white/10"></div>
+<div class="w-full bg-primary/40 h-24 rounded-t-lg glow-orange -mt-2 transition-all"></div>
+<span class="font-label-sm text-label-sm mt-2 text-on-surface-variant">2024</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center gap-1 group">
+<div class="w-full bg-white/5 h-20 rounded-t-lg transition-all group-hover:bg-white/10"></div>
+<div class="w-full bg-primary/50 h-36 rounded-t-lg glow-orange -mt-2 transition-all"></div>
+<span class="font-label-sm text-label-sm mt-2 text-on-surface-variant">2025</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center gap-1 group">
+<div class="w-full bg-white/5 h-24 rounded-t-lg transition-all group-hover:bg-white/10"></div>
+<div class="w-full bg-primary/60 h-48 rounded-t-lg glow-orange -mt-2 transition-all"></div>
+<span class="font-label-sm text-label-sm mt-2 text-on-surface-variant">2026</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center gap-1 group">
+<div class="w-full bg-white/5 h-28 rounded-t-lg transition-all group-hover:bg-white/10"></div>
+<div class="w-full bg-primary/70 h-64 rounded-t-lg glow-orange -mt-2 transition-all"></div>
+<span class="font-label-sm text-label-sm mt-2 text-on-surface-variant">2027</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center gap-1 group">
+<div class="w-full bg-white/5 h-32 rounded-t-lg transition-all group-hover:bg-white/10"></div>
+<div class="w-full bg-primary/80 h-72 rounded-t-lg glow-orange -mt-2 transition-all"></div>
+<span class="font-label-sm text-label-sm mt-2 text-on-surface-variant">2028</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center gap-1 group">
+<div class="w-full bg-white/5 h-36 rounded-t-lg transition-all group-hover:bg-white/10"></div>
+<div class="w-full bg-primary h-80 rounded-t-lg glow-orange -mt-2 transition-all"></div>
+<span class="font-label-sm text-label-sm mt-2 text-on-surface-variant">2029</span>
+</div>
+</div>
+</div>
+<!-- Legend Floating Detail -->
+<div class="hidden md:block w-48 p-4 bg-surface-container rounded-xl border border-white/5 floating">
+<p class="font-label-sm text-label-sm text-primary uppercase mb-2">Net Potential Gain</p>
+<p class="font-headline-md text-headline-md text-on-surface">+$142,500</p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">By FY 2029</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Skill Decay Risk -->
+<div class="lg:col-span-4 glass-card rounded-xl p-8 flex flex-col h-[500px]">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-error">warning</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Skill Decay Risk</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8">AI-driven obsolescence prediction for your current tech stack.</p>
+<div class="flex-1 flex flex-col gap-6">
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<span class="font-label-md text-label-md text-on-surface">React/Frontend</span>
+<span class="font-label-sm text-label-sm text-error">45% Decay (2 yrs)</span>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="skill-decay-bar h-full w-[45%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<span class="font-label-md text-label-md text-on-surface">REST API Design</span>
+<span class="font-label-sm text-label-sm text-error">62% Decay (18 mo)</span>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="skill-decay-bar h-full w-[62%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<span class="font-label-md text-label-md text-on-surface">Project Management</span>
+<span class="font-label-sm text-label-sm text-tertiary">12% Decay (5 yrs)</span>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full w-[12%]"></div>
+</div>
+</div>
+</div>
+<div class="mt-auto p-4 rounded-xl bg-error-container/20 border border-error/20">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-error">emergency_home</span>
+<p class="font-body-md text-body-md text-on-error-container">Critical: 3 skills will be obsolete by 2026. Start "LLM Integration" roadmap today.</p>
+</div>
+</div>
+</div>
+<!-- Stats Grid Row -->
+<div class="lg:col-span-4 glass-card rounded-xl p-8">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-2">Market Placement Probability</p>
+<div class="flex items-baseline gap-2 mb-4">
+<span class="font-display-lg text-display-lg text-primary">84%</span>
+<span class="font-label-md text-label-md text-tertiary">▲ 12%</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Likelihood of landing a Tier-1 role with current credentials.</p>
+</div>
+<div class="lg:col-span-4 glass-card rounded-xl p-8">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-2">Salary Benchmarking</p>
+<div class="flex items-baseline gap-2 mb-4">
+<span class="font-display-lg text-display-lg text-on-surface">$165k</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Top 5%</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Your profile is currently outperforming the market average by 22%.</p>
+</div>
+<div class="lg:col-span-4 glass-card rounded-xl p-8">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-2">Network Influence Score</p>
+<div class="flex items-baseline gap-2 mb-4">
+<span class="font-display-lg text-display-lg text-secondary">742</span>
+<span class="font-label-md text-label-md text-secondary-fixed-dim">Expert</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Your professional footprint across primary industry repositories.</p>
+</div>
+<!-- Career Orbit Chart (Bottom Large Bento) -->
+<div class="lg:col-span-12 glass-card rounded-xl p-12 overflow-hidden flex flex-col md:flex-row gap-12 items-center">
+<div class="w-full md:w-1/2 flex justify-center">
+<div class="orbit-container w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] flex items-center justify-center">
+<!-- Orbits -->
+<div class="orbit-ring w-full h-full"></div>
+<div class="orbit-ring w-3/4 h-3/4" style="animation: rotate 10s linear infinite;"></div>
+<div class="orbit-ring w-1/2 h-1/2" style="animation: rotate 15s linear reverse infinite;"></div>
+<!-- Center Node -->
+<div class="relative z-10 w-24 h-24 rounded-full bg-primary glow-orange flex items-center justify-center border-4 border-black/40">
+<span class="material-symbols-outlined text-on-primary text-4xl" style="font-variation-settings: 'FILL' 1;">person</span>
+</div>
+<!-- Satellites -->
+<div class="absolute top-[10%] left-[50%] -translate-x-1/2 flex flex-col items-center gap-1 floating" style="animation-delay: 0.5s;">
+<div class="w-12 h-12 rounded-lg bg-surface-container border border-primary/40 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">psychology</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary uppercase">Strategy</span>
+</div>
+<div class="absolute bottom-[20%] right-[10%] flex flex-col items-center gap-1 floating" style="animation-delay: 1.2s;">
+<div class="w-12 h-12 rounded-lg bg-surface-container border border-secondary/40 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">code</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary uppercase">Technical</span>
+</div>
+<div class="absolute bottom-[20%] left-[10%] flex flex-col items-center gap-1 floating" style="animation-delay: 0.8s;">
+<div class="w-12 h-12 rounded-lg bg-surface-container border border-tertiary/40 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">groups</span>
+</div>
+<span class="font-label-sm text-label-sm text-tertiary uppercase">Leadership</span>
+</div>
+</div>
+</div>
+<div class="w-full md:w-1/2 space-y-6">
+<div class="inline-block px-3 py-1 bg-primary/10 border border-primary/20 rounded-full">
+<span class="font-label-sm text-label-sm text-primary uppercase">Deep Career Simulation</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">The 2030 Roadmap Projection</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">By cross-referencing your 'Career Twin' with emerging AI sector trends, MentorAI has identified a high-alpha pivot into **Strategic Tech Ops**. This shift maximizes your existing architecture while mitigating technical skill decay.</p>
+<div class="space-y-4 pt-4">
+<div class="flex items-start gap-4">
+<div class="mt-1 w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Phase 1: Knowledge Distillation</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Extracting core principles from legacy frameworks (Q3 2024).</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="mt-1 w-6 h-6 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+<div class="w-2 h-2 rounded-full bg-white/40"></div>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant">Phase 2: Hybrid Systems Integration</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Bridging human creativity with agentic workflows (Q1 2025).</p>
+</div>
+</div>
+</div>
+<button class="w-full sm:w-auto px-8 py-4 bg-primary text-on-primary rounded-xl font-bold glow-orange mt-6 active:scale-95 duration-200">
+                            Download Simulation Data (.json)
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Hidden on this high-level screen per instructions, but kept for logic check) -->
+<!-- Suppression logic: Screen is 'AI Career Twin' which is a detail/analytics view, FAB is for 'Book a Walk' -->
+<script>
+        // Simple canvas effect for background particles
+        document.addEventListener('DOMContentLoaded', () => {
+            const orbitRings = document.querySelectorAll('.orbit-ring');
+            orbitRings.forEach((ring, index) => {
+                ring.style.borderWidth = `${1 + index * 0.5}px`;
+            });
+        });
+
+        // Hover interaction for Trajectory bars
+        const bars = document.querySelectorAll('.flex-1.flex.flex-col.group');
+        bars.forEach(bar => {
+            bar.addEventListener('mouseenter', () => {
+                const year = bar.querySelector('span').innerText;
+                // Interaction logic could go here
+            });
+        });
+    </script>
+</body></html>

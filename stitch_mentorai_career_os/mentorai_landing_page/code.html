@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MentorAI - Your Lifelong AI Career Mentor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0A0A0A;
+            color: #e2e2e2;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-card {
+            background: rgba(30, 30, 30, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-4px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .burnt-orange-glow {
+            box-shadow: 0 0 40px -10px rgba(255, 107, 53, 0.15);
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at 50% 50%, rgba(255, 107, 53, 0.08) 0%, transparent 70%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline": "#a98a80",
+                      "secondary-container": "#fbb400",
+                      "on-tertiary": "#003919",
+                      "tertiary-fixed-dim": "#4ae183",
+                      "primary-container": "#ff6b35",
+                      "on-tertiary-fixed": "#00210c",
+                      "tertiary": "#4ae183",
+                      "inverse-surface": "#e2e2e2",
+                      "on-primary": "#5d1900",
+                      "tertiary-fixed": "#6bfe9c",
+                      "surface": "#121414",
+                      "background": "#121414",
+                      "surface-variant": "#333535",
+                      "inverse-primary": "#ab3500",
+                      "tertiary-container": "#00b15c",
+                      "surface-container-low": "#1a1c1c",
+                      "on-secondary": "#422c00",
+                      "on-tertiary-container": "#003b1a",
+                      "primary-fixed-dim": "#ffb59d",
+                      "surface-container-highest": "#333535",
+                      "error-container": "#93000a",
+                      "surface-bright": "#38393a",
+                      "surface-container-high": "#282a2b",
+                      "on-secondary-container": "#694900",
+                      "on-primary-container": "#5f1900",
+                      "surface-container-lowest": "#0c0f0f",
+                      "on-error-container": "#ffdad6",
+                      "on-tertiary-fixed-variant": "#005228",
+                      "on-background": "#e2e2e2",
+                      "on-secondary-fixed": "#271900",
+                      "surface-tint": "#ffb59d",
+                      "on-primary-fixed": "#390c00",
+                      "inverse-on-surface": "#2f3131",
+                      "on-error": "#690005",
+                      "on-surface": "#e2e2e2",
+                      "outline-variant": "#594139",
+                      "surface-container": "#1e2020",
+                      "error": "#ffb4ab",
+                      "surface-dim": "#121414",
+                      "primary-fixed": "#ffdbd0",
+                      "primary": "#ffb59d",
+                      "on-surface-variant": "#e1bfb5",
+                      "secondary-fixed-dim": "#ffba27",
+                      "on-primary-fixed-variant": "#832600",
+                      "secondary-fixed": "#ffdea9",
+                      "secondary": "#ffd795",
+                      "on-secondary-fixed-variant": "#5e4100"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "container-max": "1440px",
+                      "section-gap": "120px",
+                      "gutter": "24px",
+                      "margin-mobile": "20px",
+                      "margin-desktop": "64px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Hanken Grotesk"],
+                      "display-lg": ["Hanken Grotesk"],
+                      "label-sm": ["JetBrains Mono"],
+                      "headline-lg": ["Hanken Grotesk"],
+                      "headline-lg-mobile": ["Hanken Grotesk"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "label-md": ["JetBrains Mono"]
+              },
+              "fontSize": {
+                      "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                      "label-sm": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.08em", "fontWeight": "500"}],
+                      "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- Navigation Shell -->
+<header class="docked full-width top-0 sticky z-50 border-b border-white/5 bg-surface/80 backdrop-blur-xl shadow-sm">
+<nav class="flex justify-between items-center w-full px-gutter h-16 max-w-container-max mx-auto">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md font-bold text-primary-container">MentorAI</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-primary-container font-bold font-label-md text-label-md hover:text-primary transition-colors duration-200" href="#">Dashboard</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors duration-200" href="#features">Features</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors duration-200" href="#pricing">Pricing</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center gap-2 px-3 py-1 bg-surface-container rounded-full border border-white/5">
+<span class="material-symbols-outlined text-primary-container text-sm">database</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">2,450 TOKENS</span>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-bold text-label-md hover:scale-95 transition-transform">Get Started</button>
+</div>
+</nav>
+</header>
+<main class="relative overflow-hidden">
+<!-- Hero Section -->
+<section class="relative pt-24 pb-32 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto hero-gradient">
+<div class="flex flex-col items-center text-center space-y-8 mb-20">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-container/10 border border-primary-container/20">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-primary-container uppercase tracking-widest">v2.0 Career OS Now Live</span>
+</div>
+<h1 class="font-display-lg text-display-lg max-w-4xl">
+                    Your Lifelong AI <br/><span class="text-primary-container">Career Mentor.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                    Experience the first Career Operating System. Navigate your professional growth with personalized roadmaps, real-time interview prep, and AI-driven resume optimization.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4 pt-4">
+<button class="bg-primary-container text-on-primary-container px-10 py-4 rounded-xl font-bold text-headline-md flex items-center gap-2 burnt-orange-glow hover:scale-105 transition-all">
+                        Build Your Future <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="border border-secondary-container text-secondary-container px-10 py-4 rounded-xl font-bold text-headline-md hover:bg-secondary-container/5 transition-colors">
+                        View Demo
+                    </button>
+</div>
+</div>
+<!-- Glassmorphic UI Mockup -->
+<div class="relative max-w-5xl mx-auto">
+<div class="absolute inset-0 bg-primary-container/20 blur-[120px] rounded-full -z-10 opacity-30"></div>
+<div class="glass-card rounded-2xl overflow-hidden shadow-2xl p-4 md:p-8">
+<div class="grid grid-cols-12 gap-6">
+<!-- Mock Sidebar -->
+<div class="hidden md:block col-span-3 space-y-6">
+<div class="h-8 w-32 bg-white/5 rounded-md"></div>
+<div class="space-y-4">
+<div class="h-10 bg-primary-container/10 border-r-2 border-primary-container w-full rounded-sm"></div>
+<div class="h-10 bg-white/5 w-4/5 rounded-sm"></div>
+<div class="h-10 bg-white/5 w-3/4 rounded-sm"></div>
+<div class="h-10 bg-white/5 w-5/6 rounded-sm"></div>
+</div>
+</div>
+<!-- Mock Content -->
+<div class="col-span-12 md:col-span-9 space-y-8">
+<div class="flex justify-between items-center">
+<div class="h-10 w-48 bg-white/10 rounded-lg"></div>
+<div class="flex gap-2">
+<div class="w-10 h-10 rounded-full bg-white/5"></div>
+<div class="w-10 h-10 rounded-full bg-white/5"></div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="aspect-video bg-white/5 rounded-xl border border-white/5 flex items-center justify-center p-4">
+<div class="w-full h-full rounded bg-gradient-to-br from-primary-container/20 to-transparent"></div>
+</div>
+<div class="aspect-video bg-white/5 rounded-xl border border-white/5 flex items-center justify-center p-4">
+<div class="w-full h-full rounded bg-gradient-to-tr from-secondary-container/10 to-transparent"></div>
+</div>
+</div>
+<div class="h-32 bg-white/5 rounded-xl border border-white/5"></div>
+</div>
+</div>
+</div>
+<!-- Floating Tags -->
+<div class="absolute -top-6 -right-6 md:top-20 md:-right-12 glass-card px-6 py-4 rounded-xl border-primary-container/30 border hidden sm:block">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary-fixed-dim" style="font-variation-settings: 'FILL' 1;">stars</span>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">MATCH SCORE</p>
+<p class="font-headline-md text-headline-md text-tertiary-fixed-dim">98.4%</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Product Overview: Career OS Concept -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto" id="features">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
+<div class="space-y-8">
+<h2 class="font-headline-lg text-headline-lg">Beyond a simple mentor. It’s an <span class="text-secondary-container">Operating System</span> for your life’s work.</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">MentorAI doesn't just give advice. It integrates with your technical stack, analyzes your unique memory hub, and proactively scouts for opportunities that align with your long-term career trajectory.</p>
+<ul class="space-y-4">
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary-container mt-1">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Proactive Skill Gap Analysis using 20k+ industry signals.</span>
+</li>
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary-container mt-1">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Autonomous Portfolio & Project tracking.</span>
+</li>
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary-container mt-1">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Private AI Memory Hub for personalized context.</span>
+</li>
+</ul>
+</div>
+<div class="relative group">
+<div class="absolute -inset-4 bg-gradient-to-r from-primary-container/20 to-secondary-container/20 rounded-2xl blur-2xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
+<img alt="Career OS visualization" class="relative rounded-2xl border border-white/10 w-full aspect-square object-cover" data-alt="A futuristic obsidian and glass interface depicting a complex career neural network. The central hub is glowing with burnt orange energy, showing interconnected nodes of skills, experiences, and future career milestones. The lighting is dark and cinematic, emphasizing the high-tech, expensive SaaS aesthetic of a professional command center." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTOE7tT7B7MHijocwub8xmFrxq1xpWKAiCydojC7_s3yqgFLbzdNTO-Lw2QFbc6ueFmEbY3FRphqH-jtxzh0_Nx3IAP5Bf0BZjUpenulGVhGgMGESyglBLO4cKzwAAyi3f-cP5ZUg5jXtPgrWhvgDYYp_1YAIgdPgvchwXih2dL8fEEZ81tff3tlLOPUdC7iFqhtsAPyDl15VE7d4cYd7FlmZnNjsRkf2M-vtBStGBUSVvS7hHye73d8GIIizCffmh-IlrLVENsf0M"/>
+</div>
+</div>
+</section>
+<!-- Features Bento Grid -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="text-center mb-20 space-y-4">
+<h2 class="font-headline-lg text-headline-lg">Everything you need to <span class="text-primary-container">Ascend.</span></h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">The tools that transform professionals into industry leaders.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[320px]">
+<!-- AI Memory -->
+<div class="md:col-span-8 glass-card rounded-2xl p-10 flex flex-col justify-between group overflow-hidden">
+<div class="relative z-10 space-y-4 max-w-md">
+<span class="material-symbols-outlined text-primary-container text-4xl" style="font-variation-settings: 'FILL' 1;">memory</span>
+<h3 class="font-headline-md text-headline-md">AI Memory Hub</h3>
+<p class="text-on-surface-variant font-body-md">Store every project, meeting note, and breakthrough. Your mentor grows smarter the more you share, becoming a digital extension of your brain.</p>
+</div>
+<div class="absolute right-0 bottom-0 w-1/2 h-full opacity-20 group-hover:scale-110 transition-transform">
+<img alt="Memory Hub" class="w-full h-full object-cover" data-alt="A macro visualization of a digital memory grid with floating particles and crystalline data shards. Deep obsidian background with subtle orange and amber highlights reflecting off the facets. The atmosphere is sophisticated and intelligent, representing a high-performance personal data storage system for career growth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpyKiT3JT-BZgZb3SLJez53uUQyw4KfjTLMU7-ErJDQ4LuMZHS4rrXmH6zeH7s3ThGvn-ZvJ4dhX3EEQZZ9h7QSRrA3d203OINCNx2tRcmKDTTsWuMkHSseVtYOrs5yMPLsmjjkZcTSwRGSgu2s-wpmuKkiF9nZzE-VdSM5yNDlt3EZkmAUvM7qVVP-unVIKS17agRyqHy2p1V8axlNwa-lU9gDesQz_61I17bej5-ul_h2Cly-Dw1eeglrQRyMMw53ZrIN9qD-Fp5"/>
+</div>
+</div>
+<!-- Resume Optimization -->
+<div class="md:col-span-4 glass-card rounded-2xl p-10 flex flex-col justify-between">
+<div class="space-y-4">
+<span class="material-symbols-outlined text-secondary-container text-4xl">description</span>
+<h3 class="font-headline-md text-headline-md">Resume Analyzer</h3>
+</div>
+<p class="text-on-surface-variant font-body-md">Real-time scoring against 500+ top-tier tech job descriptions. Automatic PDF tailoring in seconds.</p>
+</div>
+<!-- Career Roadmaps -->
+<div class="md:col-span-4 glass-card rounded-2xl p-10 flex flex-col justify-between">
+<div class="space-y-4">
+<span class="material-symbols-outlined text-tertiary-fixed text-4xl">map</span>
+<h3 class="font-headline-md text-headline-md">Roadmaps</h3>
+</div>
+<p class="text-on-surface-variant font-body-md">Dynamic paths that adjust as you learn. Forget linear courses; this is agile career development.</p>
+</div>
+<!-- Interview Prep -->
+<div class="md:col-span-8 glass-card rounded-2xl p-10 flex flex-col md:flex-row gap-8 overflow-hidden">
+<div class="md:w-1/2 flex flex-col justify-between h-full">
+<div class="space-y-4">
+<span class="material-symbols-outlined text-primary-container text-4xl">mic</span>
+<h3 class="font-headline-md text-headline-md">Voice Interview Prep</h3>
+</div>
+<p class="text-on-surface-variant font-body-md">Conduct mock interviews via voice. Get instant feedback on tone, clarity, and technical accuracy from the AI Mentor.</p>
+</div>
+<div class="md:w-1/2 h-full rounded-xl bg-surface-container-highest border border-white/5 p-4 flex flex-col gap-2">
+<div class="h-2 w-1/3 bg-primary-container/40 rounded"></div>
+<div class="h-4 w-full bg-white/5 rounded"></div>
+<div class="h-4 w-5/6 bg-white/5 rounded"></div>
+<div class="flex-grow flex items-center justify-center">
+<div class="w-16 h-16 rounded-full border-2 border-primary-container flex items-center justify-center animate-pulse">
+<span class="material-symbols-outlined text-primary-container">mic</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Pricing Tiers -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto bg-surface-container-lowest/50 rounded-3xl" id="pricing">
+<div class="text-center mb-20 space-y-4">
+<h2 class="font-headline-lg text-headline-lg">Invest in your <span class="text-secondary-container">Future Self.</span></h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Plans that scale with your professional ambition.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Free -->
+<div class="glass-card rounded-2xl p-10 flex flex-col border border-white/5">
+<span class="font-label-md text-label-md text-on-surface-variant mb-4 uppercase tracking-widest">Standard</span>
+<h3 class="font-headline-md text-headline-md mb-2">Free Tier</h3>
+<p class="text-on-surface-variant font-body-md mb-8">Basic career tools for individuals getting started.</p>
+<div class="text-4xl font-bold mb-8">$0<span class="text-lg font-normal text-on-surface-variant">/mo</span></div>
+<ul class="space-y-4 flex-grow mb-12">
+<li class="flex items-center gap-3 text-on-surface-variant font-body-md">
+<span class="material-symbols-outlined text-primary text-sm">done</span> AI Resume Review
+                        </li>
+<li class="flex items-center gap-3 text-on-surface-variant font-body-md">
+<span class="material-symbols-outlined text-primary text-sm">done</span> 1 Career Roadmap
+                        </li>
+<li class="flex items-center gap-3 text-on-surface-variant font-body-md opacity-40">
+<span class="material-symbols-outlined text-sm">close</span> AI Memory Hub
+                        </li>
+</ul>
+<button class="w-full py-4 rounded-xl border border-white/10 font-bold hover:bg-white/5 transition-colors">Start Free</button>
+</div>
+<!-- Pro -->
+<div class="relative group">
+<div class="absolute -inset-1 bg-gradient-to-b from-primary-container to-secondary-container rounded-2xl blur opacity-25 group-hover:opacity-50 transition-opacity"></div>
+<div class="relative glass-card rounded-2xl p-10 flex flex-col border-primary-container/30 border-2">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary-container text-on-primary-container px-4 py-1 rounded-full font-label-sm text-label-sm">MOST POPULAR</div>
+<span class="font-label-md text-label-md text-primary-container mb-4 uppercase tracking-widest">Growth</span>
+<h3 class="font-headline-md text-headline-md mb-2">Pro Mentor</h3>
+<p class="text-on-surface-variant font-body-md mb-8">Full-access Career OS for power users.</p>
+<div class="text-4xl font-bold mb-8">$29<span class="text-lg font-normal text-on-surface-variant">/mo</span></div>
+<ul class="space-y-4 flex-grow mb-12">
+<li class="flex items-center gap-3 text-on-surface font-body-md">
+<span class="material-symbols-outlined text-primary-container text-sm">done</span> Unlimited Memory Hub
+                            </li>
+<li class="flex items-center gap-3 text-on-surface font-body-md">
+<span class="material-symbols-outlined text-primary-container text-sm">done</span> All Career Roadmaps
+                            </li>
+<li class="flex items-center gap-3 text-on-surface font-body-md">
+<span class="material-symbols-outlined text-primary-container text-sm">done</span> Voice Interview Simulations
+                            </li>
+<li class="flex items-center gap-3 text-on-surface font-body-md">
+<span class="material-symbols-outlined text-primary-container text-sm">done</span> Priority Token Access
+                            </li>
+</ul>
+<button class="w-full py-4 rounded-xl bg-primary-container text-on-primary-container font-bold burnt-orange-glow hover:scale-105 transition-all">Go Pro</button>
+</div>
+</div>
+<!-- Enterprise -->
+<div class="glass-card rounded-2xl p-10 flex flex-col border border-white/5">
+<span class="font-label-md text-label-md text-on-surface-variant mb-4 uppercase tracking-widest">Organization</span>
+<h3 class="font-headline-md text-headline-md mb-2">Team OS</h3>
+<p class="text-on-surface-variant font-body-md mb-8">Internal mobility and talent growth for companies.</p>
+<div class="text-4xl font-bold mb-8">Custom</div>
+<ul class="space-y-4 flex-grow mb-12">
+<li class="flex items-center gap-3 text-on-surface-variant font-body-md">
+<span class="material-symbols-outlined text-primary text-sm">done</span> Custom Knowledge Base
+                        </li>
+<li class="flex items-center gap-3 text-on-surface-variant font-body-md">
+<span class="material-symbols-outlined text-primary text-sm">done</span> Skill Gap Dashboard
+                        </li>
+<li class="flex items-center gap-3 text-on-surface-variant font-body-md">
+<span class="material-symbols-outlined text-primary text-sm">done</span> Dedicated Success Manager
+                        </li>
+</ul>
+<button class="w-full py-4 rounded-xl border border-white/10 font-bold hover:bg-white/5 transition-colors">Contact Sales</button>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto text-center">
+<div class="glass-card rounded-3xl p-16 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary-container/10 blur-[100px] rounded-full"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 bg-secondary-container/10 blur-[100px] rounded-full"></div>
+<div class="relative z-10 space-y-8">
+<h2 class="font-headline-lg text-headline-lg">Stop wandering. <br/>Start navigating.</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Join 50,000+ professionals using MentorAI to accelerate their career growth by 3x.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-4">
+<input class="bg-surface-container-lowest border border-white/10 rounded-xl px-6 py-4 w-full sm:w-80 focus:ring-1 focus:ring-primary-container outline-none transition-all" placeholder="Enter your work email" type="email"/>
+<button class="bg-primary-container text-on-primary-container px-10 py-4 rounded-xl font-bold hover:scale-105 transition-transform">Get Early Access</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="border-t border-white/5 pt-20 pb-10 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-12 mb-20">
+<div class="col-span-2 md:col-span-1 space-y-6">
+<span class="font-headline-md text-headline-md font-bold text-primary-container">MentorAI</span>
+<p class="text-on-surface-variant font-body-md">The next generation career operating system. Powered by advanced neural networks and industry expertise.</p>
+</div>
+<div class="space-y-6">
+<h4 class="font-label-md text-label-md text-on-surface font-bold uppercase tracking-wider">Product</h4>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Features</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Pricing</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Career OS</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Roadmaps</a></li>
+</ul>
+</div>
+<div class="space-y-6">
+<h4 class="font-label-md text-label-md text-on-surface font-bold uppercase tracking-wider">Resources</h4>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Documentation</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">API Keys</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Help Center</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Community</a></li>
+</ul>
+</div>
+<div class="space-y-6">
+<h4 class="font-label-md text-label-md text-on-surface font-bold uppercase tracking-wider">Legal</h4>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Cookie Policy</a></li>
+</ul>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center pt-10 border-t border-white/5 gap-6">
+<p class="text-on-surface-variant font-label-md text-label-md">© 2024 MentorAI. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+</div>
+</div>
+</footer>
+<!-- Interactive Atmosphere Script -->
+<script>
+        document.addEventListener('mousemove', (e) => {
+            const cursor = { x: e.clientX, y: e.clientY };
+            const glow = document.querySelector('.hero-gradient');
+            if (glow) {
+                const rect = glow.getBoundingClientRect();
+                const x = ((cursor.x - rect.left) / rect.width) * 100;
+                const y = ((cursor.y - rect.top) / rect.height) * 100;
+                glow.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(255, 107, 53, 0.12) 0%, transparent 70%)`;
+            }
+        });
+
+        // Smooth reveal on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+            observer.observe(section);
+        });
+    </script>
+</body></html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MentorAI | Voice Interview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(30, 30, 30, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .orb-glow {
+            box-shadow: 0 0 60px 20px rgba(255, 107, 53, 0.15);
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.2; }
+            100% { transform: scale(0.8); opacity: 0.5; }
+        }
+        .animate-pulse-ring {
+            animation: pulse-ring 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        .soundwave-bar {
+            transition: height 0.1s ease-in-out;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline": "#a98a80",
+                      "secondary-container": "#fbb400",
+                      "on-tertiary": "#003919",
+                      "tertiary-fixed-dim": "#4ae183",
+                      "primary-container": "#ff6b35",
+                      "on-tertiary-fixed": "#00210c",
+                      "tertiary": "#4ae183",
+                      "inverse-surface": "#e2e2e2",
+                      "on-primary": "#5d1900",
+                      "tertiary-fixed": "#6bfe9c",
+                      "surface": "#121414",
+                      "background": "#121414",
+                      "surface-variant": "#333535",
+                      "inverse-primary": "#ab3500",
+                      "tertiary-container": "#00b15c",
+                      "surface-container-low": "#1a1c1c",
+                      "on-secondary": "#422c00",
+                      "on-tertiary-container": "#003b1a",
+                      "primary-fixed-dim": "#ffb59d",
+                      "surface-container-highest": "#333535",
+                      "error-container": "#93000a",
+                      "surface-bright": "#38393a",
+                      "surface-container-high": "#282a2b",
+                      "on-secondary-container": "#694900",
+                      "on-primary-container": "#5f1900",
+                      "surface-container-lowest": "#0c0f0f",
+                      "on-error-container": "#ffdad6",
+                      "on-tertiary-fixed-variant": "#005228",
+                      "on-background": "#e2e2e2",
+                      "on-secondary-fixed": "#271900",
+                      "surface-tint": "#ffb59d",
+                      "on-primary-fixed": "#390c00",
+                      "inverse-on-surface": "#2f3131",
+                      "on-error": "#690005",
+                      "on-surface": "#e2e2e2",
+                      "outline-variant": "#594139",
+                      "surface-container": "#1e2020",
+                      "error": "#ffb4ab",
+                      "surface-dim": "#121414",
+                      "primary-fixed": "#ffdbd0",
+                      "primary": "#ffb59d",
+                      "on-surface-variant": "#e1bfb5",
+                      "secondary-fixed-dim": "#ffba27",
+                      "on-primary-fixed-variant": "#832600",
+                      "secondary-fixed": "#ffdea9",
+                      "secondary": "#ffd795",
+                      "on-secondary-fixed-variant": "#5e4100"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "container-max": "1440px",
+                      "section-gap": "120px",
+                      "gutter": "24px",
+                      "margin-mobile": "20px",
+                      "margin-desktop": "64px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Hanken Grotesk"],
+                      "display-lg": ["Hanken Grotesk"],
+                      "label-sm": ["JetBrains Mono"],
+                      "headline-lg": ["Hanken Grotesk"],
+                      "headline-lg-mobile": ["Hanken Grotesk"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "label-md": ["JetBrains Mono"]
+              },
+              "fontSize": {
+                      "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                      "label-sm": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.08em", "fontWeight": "500"}],
+                      "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container overflow-hidden">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface/80 backdrop-blur-xl border-b border-white/5 flex justify-between items-center px-gutter h-16">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-primary-container">MentorAI</span>
+<div class="h-6 w-[1px] bg-white/10 hidden md:block"></div>
+<span class="hidden md:block font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Voice Mock Interview</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-high border border-white/5">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span class="font-label-md text-label-md text-on-surface">08:42</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">database</span>
+<span class="font-label-md text-label-md">1,240 tokens</span>
+</div>
+</div>
+</header>
+<main class="flex h-screen pt-16">
+<!-- Sidebar Navigation (Matching JSON Structure) -->
+<aside class="bg-surface-container-low border-r border-white/5 w-64 hidden md:flex flex-col h-full py-6">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container" data-weight="fill">psychology</span>
+</div>
+<div>
+<p class="font-headline-md text-headline-md font-bold text-primary-container leading-none">MentorAI</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Career OS</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1 overflow-y-auto custom-scrollbar">
+<!-- Navigation items mapped from JSON logic -->
+<div class="px-4 py-3 flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant/50 transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</div>
+<div class="bg-primary-container/10 text-primary-container border-r-2 border-primary-container px-4 py-3 flex items-center gap-3 translate-x-1">
+<span class="material-symbols-outlined">mic</span>
+<span class="font-label-md text-label-md">Voice Interviews</span>
+</div>
+<div class="px-4 py-3 flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant/50 transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Resume Analyzer</span>
+</div>
+<div class="px-4 py-3 flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant/50 transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</div>
+</nav>
+<div class="mt-auto px-6 pt-6 border-t border-white/5">
+<button class="w-full bg-primary-container text-on-primary-container py-3 rounded-xl font-headline-md text-headline-md font-semibold hover:brightness-110 active:scale-95 transition-all">
+                    Upgrade to Pro
+                </button>
+</div>
+</aside>
+<!-- Main Workspace -->
+<section class="flex-1 relative flex flex-col md:flex-row bg-surface-container-lowest overflow-hidden">
+<!-- Live Interview Area -->
+<div class="flex-1 relative flex flex-col items-center justify-center p-8">
+<!-- Background Ambient Animation -->
+
+<!-- AI Persona Orb -->
+<div class="relative z-10 flex flex-col items-center">
+<div class="relative w-64 h-64 md:w-80 md:h-80 flex items-center justify-center">
+<div class="absolute inset-0 bg-primary-container/20 rounded-full blur-[80px] orb-glow animate-pulse"></div>
+<!-- Pulse Rings -->
+<div class="absolute inset-0 border-2 border-primary-container/30 rounded-full animate-pulse-ring"></div>
+<div class="absolute inset-0 border-2 border-primary-container/20 rounded-full animate-pulse-ring" style="animation-delay: 1.5s"></div>
+<!-- Core Avatar -->
+<div class="relative w-48 h-48 md:w-56 md:h-56 bg-gradient-to-br from-primary-container to-secondary-container rounded-full overflow-hidden flex items-center justify-center shadow-2xl shadow-primary-container/40">
+<div class="absolute inset-0 opacity-40 mix-blend-overlay">
+
+</div>
+<span class="material-symbols-outlined text-on-primary-container text-[80px] md:text-[100px]" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+</div>
+<!-- Soundwave Animation -->
+<div class="mt-12 flex items-end gap-1.5 h-16">
+<!-- Dynamic bars controlled by JS -->
+<div class="soundwave-bar w-1.5 bg-primary-container rounded-full h-4" style="height: 40%"></div>
+<div class="soundwave-bar w-1.5 bg-primary-container rounded-full h-8" style="height: 70%"></div>
+<div class="soundwave-bar w-1.5 bg-primary-container rounded-full h-12" style="height: 90%"></div>
+<div class="soundwave-bar w-1.5 bg-primary-container rounded-full h-6" style="height: 50%"></div>
+<div class="soundwave-bar w-1.5 bg-primary-container rounded-full h-10" style="height: 80%"></div>
+<div class="soundwave-bar w-1.5 bg-primary-container rounded-full h-14" style="height: 100%"></div>
+<div class="soundwave-bar w-1.5 bg-primary-container rounded-full h-8" style="height: 70%"></div>
+<div class="soundwave-bar w-1.5 bg-primary-container rounded-full h-12" style="height: 90%"></div>
+<div class="soundwave-bar w-1.5 bg-primary-container rounded-full h-4" style="height: 40%"></div>
+</div>
+<div class="mt-8 text-center">
+<p class="font-headline-md text-headline-md text-on-surface">"How would you handle a conflict between two engineers on your team?"</p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 italic">Listening to your response...</p>
+</div>
+</div>
+<!-- Footer Controls -->
+<div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-6 z-20">
+<button class="w-14 h-14 rounded-full glass-panel flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/80 transition-all active:scale-90">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="w-20 h-20 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-lg shadow-primary-container/25 hover:brightness-110 active:scale-95 transition-all" id="micToggle">
+<span class="material-symbols-outlined text-4xl" id="micIcon">mic</span>
+</button>
+<button class="w-14 h-14 rounded-full bg-error/20 border border-error/30 text-error flex items-center justify-center hover:bg-error hover:text-on-error transition-all active:scale-90" onclick="endSession()">
+<span class="material-symbols-outlined">call_end</span>
+</button>
+</div>
+</div>
+<!-- Transcript Sidebar (Glassmorphism Overlay) -->
+<div class="w-full md:w-96 border-l border-white/5 bg-surface-container-low flex flex-col h-full">
+<div class="p-6 border-b border-white/5 flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-on-surface">Live Transcript</h3>
+<span class="px-2 py-1 rounded bg-tertiary/10 text-tertiary font-label-sm text-label-sm uppercase">Active</span>
+</div>
+<div class="flex-1 p-6 space-y-6 overflow-y-auto custom-scrollbar" id="transcript-container">
+<div class="flex flex-col gap-2">
+<span class="font-label-md text-label-md text-primary-container">MentorAI</span>
+<p class="font-body-md text-body-md text-on-surface-variant bg-surface-container-high/50 p-4 rounded-xl rounded-tl-none">
+                            Welcome back, Alex. Let's dive into your system design expertise. Suppose you're building a real-time notification system for 10 million users. How would you ensure high availability?
+                        </p>
+</div>
+<div class="flex flex-col gap-2 items-end">
+<span class="font-label-md text-label-md text-secondary-container">You</span>
+<p class="font-body-md text-body-md text-on-surface bg-primary-container/5 p-4 rounded-xl rounded-tr-none border border-primary-container/10">
+                            I would start with a distributed message queue like Kafka to decouple the ingestion from the delivery service...
+                        </p>
+</div>
+<div class="flex flex-col gap-2">
+<span class="material-symbols-outlined text-tertiary-container text-sm animate-pulse">pending</span>
+<div class="w-1/2 h-4 bg-surface-variant/20 rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-container/30 w-1/3 animate-shimmer"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Feedback Overlay (Hidden by default) -->
+<div class="fixed inset-0 z-[100] glass-panel flex items-center justify-center p-gutter hidden opacity-0 transition-opacity duration-500" id="feedback-overlay">
+<div class="max-w-4xl w-full bg-surface-container-high rounded-[32px] overflow-hidden shadow-2xl border border-white/10">
+<div class="p-8 md:p-12">
+<div class="flex justify-between items-start mb-12">
+<div>
+<h2 class="font-display-lg text-headline-lg text-on-surface">Session Complete</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2">Principal Systems Engineer - Mock Interview</p>
+</div>
+<button class="w-12 h-12 rounded-full flex items-center justify-center hover:bg-surface-variant/50" onclick="closeFeedback()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Bento Grid Feedback -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Confidence Score -->
+<div class="glass-panel p-6 rounded-2xl border border-primary-container/20">
+<p class="font-label-md text-label-md text-on-surface-variant mb-4">CONFIDENCE</p>
+<div class="flex items-end gap-2">
+<span class="font-display-lg text-headline-lg text-primary-container leading-none">92%</span>
+<span class="font-label-sm text-label-sm text-tertiary mb-1">+4% vs last</span>
+</div>
+<div class="mt-4 h-2 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[92%]"></div>
+</div>
+</div>
+<!-- Communication Clarity -->
+<div class="glass-panel p-6 rounded-2xl">
+<p class="font-label-md text-label-md text-on-surface-variant mb-4">COMMUNICATION</p>
+<div class="flex items-end gap-2">
+<span class="font-display-lg text-headline-lg text-secondary-container leading-none">85%</span>
+</div>
+<p class="mt-4 font-body-md text-body-md text-on-surface-variant">Used 3 fillers: "um", "like", "actually". Excellent pacing.</p>
+</div>
+<!-- Technical Accuracy -->
+<div class="glass-panel p-6 rounded-2xl">
+<p class="font-label-md text-label-md text-on-surface-variant mb-4">ACCURACY</p>
+<div class="flex items-end gap-2">
+<span class="font-display-lg text-headline-lg text-tertiary leading-none">78%</span>
+</div>
+<p class="mt-4 font-body-md text-body-md text-on-surface-variant">Missed mention of CAP theorem constraints in system design.</p>
+</div>
+</div>
+<div class="mt-8 p-8 bg-surface-container rounded-2xl border border-white/5">
+<h4 class="font-headline-md text-headline-md text-on-surface mb-4">Key Takeaway</h4>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                        "Your technical depth is strong, but you tend to jump into solutions too quickly. Practice clarifying requirements for 2-3 minutes before proposing an architecture."
+                    </p>
+</div>
+<div class="mt-12 flex gap-4">
+<button class="flex-1 bg-primary-container text-on-primary-container py-4 rounded-xl font-headline-md text-headline-md font-bold hover:brightness-110">Download Report</button>
+<button class="flex-1 bg-surface-variant/50 text-on-surface py-4 rounded-xl font-headline-md text-headline-md font-bold hover:bg-surface-variant">Review Transcript</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+        // Microphone Toggle Logic
+        const micBtn = document.getElementById('micToggle');
+        const micIcon = document.getElementById('micIcon');
+        let isMuted = false;
+
+        micBtn.addEventListener('click', () => {
+            isMuted = !isMuted;
+            if (isMuted) {
+                micIcon.innerText = 'mic_off';
+                micBtn.classList.replace('bg-primary-container', 'bg-surface-variant');
+                micBtn.classList.replace('text-on-primary-container', 'text-on-surface-variant');
+            } else {
+                micIcon.innerText = 'mic';
+                micBtn.classList.replace('bg-surface-variant', 'bg-primary-container');
+                micBtn.classList.replace('text-on-surface-variant', 'text-on-primary-container');
+            }
+        });
+
+        // Dynamic Soundwave Animation
+        const bars = document.querySelectorAll('.soundwave-bar');
+        function animateSoundwave() {
+            if (!isMuted) {
+                bars.forEach(bar => {
+                    const height = Math.floor(Math.random() * 80) + 20;
+                    bar.style.height = `${height}%`;
+                });
+            } else {
+                bars.forEach(bar => bar.style.height = '10%');
+            }
+        }
+        setInterval(animateSoundwave, 150);
+
+        // Session Control
+        function endSession() {
+            const overlay = document.getElementById('feedback-overlay');
+            overlay.classList.remove('hidden');
+            setTimeout(() => {
+                overlay.classList.add('opacity-100');
+            }, 10);
+        }
+
+        function closeFeedback() {
+            const overlay = document.getElementById('feedback-overlay');
+            overlay.classList.remove('opacity-100');
+            setTimeout(() => {
+                overlay.classList.add('hidden');
+            }, 500);
+        }
+
+        // Scroll Transcript to Bottom
+        const transcript = document.getElementById('transcript-container');
+        transcript.scrollTop = transcript.scrollHeight;
+    </script>
+</body></html>

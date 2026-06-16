@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Resource Intelligence Hub | MentorAI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #0A0A0A;
+            color: #e2e2e2;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(30, 30, 30, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+        .burnt-orange-glow {
+            box-shadow: 0 0 20px 0px rgba(255, 107, 53, 0.15);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0c0f0f;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #333535;
+            border-radius: 10px;
+        }
+        .active-pill {
+            background: #ff6b35;
+            color: #0A0A0A;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#e2e2e2",
+                        "tertiary-fixed-dim": "#4ae183",
+                        "surface-container-highest": "#333535",
+                        "surface-dim": "#121414",
+                        "on-primary": "#5d1900",
+                        "error": "#ffb4ab",
+                        "surface-container": "#1e2020",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-fixed": "#390c00",
+                        "on-tertiary-fixed": "#00210c",
+                        "inverse-surface": "#e2e2e2",
+                        "surface-bright": "#38393a",
+                        "on-secondary-container": "#694900",
+                        "background": "#121414",
+                        "outline": "#a98a80",
+                        "on-tertiary": "#003919",
+                        "secondary-container": "#fbb400",
+                        "secondary": "#ffd795",
+                        "primary-fixed-dim": "#ffb59d",
+                        "surface-container-lowest": "#0c0f0f",
+                        "surface": "#121414",
+                        "primary-fixed": "#ffdbd0",
+                        "on-tertiary-fixed-variant": "#005228",
+                        "on-error": "#690005",
+                        "secondary-fixed-dim": "#ffba27",
+                        "on-surface-variant": "#e1bfb5",
+                        "primary-container": "#ff6b35",
+                        "outline-variant": "#594139",
+                        "on-primary-container": "#5f1900",
+                        "on-background": "#e2e2e2",
+                        "tertiary-container": "#00b15c",
+                        "surface-tint": "#ffb59d",
+                        "surface-container-high": "#282a2b",
+                        "surface-container-low": "#1a1c1c",
+                        "secondary-fixed": "#ffdea9",
+                        "on-secondary-fixed": "#271900",
+                        "on-primary-fixed-variant": "#832600",
+                        "surface-variant": "#333535",
+                        "on-tertiary-container": "#003b1a",
+                        "on-secondary-fixed-variant": "#5e4100",
+                        "on-secondary": "#422c00",
+                        "inverse-on-surface": "#2f3131",
+                        "tertiary": "#4ae183",
+                        "primary": "#ffb59d",
+                        "inverse-primary": "#ab3500",
+                        "tertiary-fixed": "#6bfe9c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "container-max": "1440px",
+                        "unit": "8px",
+                        "section-gap": "120px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["JetBrains Mono"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.08em", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                        "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background selection:bg-primary-container selection:text-on-primary-container">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full w-64 rounded-r-xl bg-surface-container dark:bg-surface-container-low border-r border-white/5 shadow-xl flex flex-col p-unit z-50 hidden md:flex">
+<div class="flex items-center gap-3 px-4 py-6 mb-4">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">MentorAI</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Career OS</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-white/10 transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-white/10 transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">database</span>
+<span class="font-label-md text-label-md">Memory Hub</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-white/10 transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">explore</span>
+<span class="font-label-md text-label-md">Career Discovery</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-white/10 transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">map</span>
+<span class="font-label-md text-label-md">Roadmaps</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg font-bold group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" style="font-variation-settings: 'FILL' 1;">library_books</span>
+<span class="font-label-md text-label-md">Resources</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-white/10 transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">work</span>
+<span class="font-label-md text-label-md">Projects</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-white/10 transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">stars</span>
+<span class="font-label-md text-label-md">Opportunities</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-white/10 transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">description</span>
+<span class="font-label-md text-label-md">Resume Builder</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-white/10 transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">record_voice_over</span>
+<span class="font-label-md text-label-md">Interview Prep</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-white/10 transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto p-4">
+<button class="w-full py-3 bg-secondary-container text-on-secondary-fixed font-bold rounded-lg hover:brightness-110 transition-all active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">workspace_premium</span>
+                Upgrade to Pro
+            </button>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="md:ml-64 min-h-screen relative overflow-hidden">
+<!-- Top App Bar -->
+<header class="fixed top-0 right-0 left-0 md:left-64 z-40 bg-surface/80 backdrop-blur-xl border-b border-white/5">
+<div class="max-w-container-max mx-auto px-gutter py-4 flex justify-between items-center">
+<div class="flex items-center gap-4 flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full pl-10 pr-4 py-2 text-body-md focus:ring-1 focus:ring-primary transition-all" placeholder="Search for learning paths, videos, or courses..." type="text"/>
+</div>
+<button class="p-2 hover:bg-white/5 rounded-full transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">tune</span>
+</button>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-4 py-2 glass-card rounded-full hover:bg-white/5">
+<span class="material-symbols-outlined text-secondary">account_balance_wallet</span>
+<span class="font-label-md text-label-md">240 Tokens</span>
+</button>
+<button class="p-2 hover:bg-white/5 rounded-full relative">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full"></span>
+</button>
+<div class="w-10 h-10 rounded-full border border-primary overflow-hidden">
+<img alt="User avatar" class="w-full h-full object-cover" data-alt="A high-quality 3D rendered avatar of a professional young male with glasses and a friendly expression. The lighting is cinematic with warm amber highlights against a dark background, fitting the premium tech aesthetic of the career platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDntM-m4SQ0w24RlJ3l98wuY06BmjKaj4DRU6iw0ZGHkTtGpOpUaqMhWCqHhlHBMld6s2DZd6Ul30bUzbGpc0DanimGbclPoqr7jpMo9as1RlYyPc5QiSw8ugmTbfOQcQd7JXlNsCXvwnk70lJYaiZCXz4aw5KsrWV-hHOv5sliFBKQWV657jVB5qqohW6LRswRspZPbswCLtIyNdNdDvrfsNJCNxrbNUNsvipIEN52mIZ_G4rmSNYUwc3ppqd_3LzBQL4kAEQnC5h"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="pt-24 pb-section-gap px-gutter max-w-container-max mx-auto">
+<!-- Hero Title -->
+<section class="mb-12">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h2 class="font-headline-lg text-headline-lg font-bold mb-2">Resource Intelligence Hub</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Discover curated learning resources from across the web, pre-analyzed by AI to align with your career roadmap.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-2.5 rounded-full font-label-md text-label-md bg-white/5 border border-white/10 hover:border-primary/50 transition-all active:scale-95">All Sources</button>
+<button class="px-6 py-2.5 rounded-full font-label-md text-label-md glass-card flex items-center gap-2 border-primary/20 bg-primary/5 text-primary">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+                            AI Verified Only
+                        </button>
+</div>
+</div>
+</section>
+<!-- Filters Bar -->
+<div class="flex flex-wrap gap-4 mb-8">
+<button class="active-pill px-5 py-2 rounded-full font-label-md text-label-md transition-all">Latest</button>
+<button class="px-5 py-2 rounded-full font-label-md text-label-md bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all border border-white/5">Video Courses</button>
+<button class="px-5 py-2 rounded-full font-label-md text-label-md bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all border border-white/5">Interactive Labs</button>
+<button class="px-5 py-2 rounded-full font-label-md text-label-md bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all border border-white/5">Documentation</button>
+<button class="px-5 py-2 rounded-full font-label-md text-label-md bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all border border-white/5">Academic Papers</button>
+<div class="ml-auto flex items-center gap-2 text-on-surface-variant">
+<span class="font-label-sm text-label-sm">Sort by:</span>
+<select class="bg-transparent border-none font-label-sm text-label-sm text-primary focus:ring-0 cursor-pointer">
+<option>Relevance</option>
+<option>Popularity</option>
+<option>Duration</option>
+</select>
+</div>
+</div>
+<!-- Bento Grid of Resource Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- YouTube Resource -->
+<div class="glass-card rounded-xl overflow-hidden group">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A high-contrast cinematic shot of a modern computer server room bathed in cool blue and neon orange light. Rows of glowing hardware with intricate wiring symbolize advanced computing power and technical mastery, perfect for a high-end educational resource about system architecture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBbKNnfxlwGNDRjFBwCwBkdaPYsv1JhDXaz8PiMNxrcwGza6wWbmX-1_Ttlw1VSUtqlTeCbfrY9SbgauYuVOcQwSa6UjonyYel3oiJC2u-7H2UKtAA74_TzyTwVuVO_8zzjVrHQoSaOj5nAewd2aiYh1AJuOWlVZpVN42AwNFc297e3axdviLbYpB_8D_xf_1Yr_YCz1Sdgo2HwN_CPj_IJxiKVIe5_-w3HjtWEYYFYS8sPFfThEZdU7OB_6CJ60kOAOx8P9ubFwhs"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute top-4 left-4 px-3 py-1 bg-red-600 text-white rounded font-label-sm text-[10px] tracking-widest flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">play_circle</span>
+                            YOUTUBE
+                        </div>
+<div class="absolute bottom-4 left-4">
+<span class="px-2 py-1 bg-black/60 backdrop-blur-md rounded font-label-sm text-label-sm text-white">45:12</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline-md text-headline-md mb-2 group-hover:text-primary transition-colors">Mastering Vector Databases</h3>
+<div class="flex items-center gap-4 mb-4">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-tertiary">signal_cellular_alt</span>
+<span class="font-label-sm text-label-sm">Intermediate</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span class="font-label-sm text-label-sm">124k</span>
+</div>
+</div>
+<div class="bg-white/5 border border-white/5 rounded-lg p-3 mb-6">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-label-sm text-label-sm text-primary uppercase">AI Summary</span>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed">Focuses on Pinecone and Weaviate architectures. Explains embedding logic and RAG implementation patterns for LLMs.</p>
+</div>
+<button class="w-full py-3 bg-primary-container text-on-primary-container font-bold rounded-lg hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add_circle</span>
+                            Add to Roadmap
+                        </button>
+</div>
+</div>
+<!-- Coursera Resource -->
+<div class="glass-card rounded-xl overflow-hidden group">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Abstract digital code flowing through a dark space with golden and deep obsidian light rays. The visuals represent the complexity and elegance of advanced algorithms, designed with a premium, minimalist SaaS feel using a dark-mode palette and vibrant amber highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCv71bDNBMN2KeinLbrFNOFxoWMqFVKgDfw0qHuvncoZWsoNPtF_sEBZh8TjwydfBXCPVMmeuFP3MyW61T0uuB0o4le3Ey-ZMEEVRkY8KxteTRsg2gFeFQ9_TQPFExxdDYg2E3WvyRiyUeqLXTqxbGATa3zpZ9FdrNkzxlUO2iuQZEOy_8PAbI6aPraS56qSkP1Xh9C_bR4J1JEXHEpVuBBjFLzN4onF2pX33LlGJxuyVZULcFHJUjTkhrDX4KR4Qxj5UQ9Rjee5RVC"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute top-4 left-4 px-3 py-1 bg-blue-600 text-white rounded font-label-sm text-[10px] tracking-widest flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">school</span>
+                            COURSERA
+                        </div>
+<div class="absolute bottom-4 left-4">
+<span class="px-2 py-1 bg-black/60 backdrop-blur-md rounded font-label-sm text-label-sm text-white">12 Weeks</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline-md text-headline-md mb-2 group-hover:text-primary transition-colors">Advanced Machine Learning</h3>
+<div class="flex items-center gap-4 mb-4">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-error">signal_cellular_alt</span>
+<span class="font-label-sm text-label-sm">Expert</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">stars</span>
+<span class="font-label-sm text-label-sm">4.9/5</span>
+</div>
+</div>
+<div class="bg-white/5 border border-white/5 rounded-lg p-3 mb-6">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-label-sm text-label-sm text-primary uppercase">AI Summary</span>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed">In-depth mathematical foundations of neural networks. Includes hands-on projects with PyTorch and TensorFlow.</p>
+</div>
+<button class="w-full py-3 bg-primary-container text-on-primary-container font-bold rounded-lg hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add_circle</span>
+                            Add to Roadmap
+                        </button>
+</div>
+</div>
+<!-- GitHub Resource -->
+<div class="glass-card rounded-xl overflow-hidden group">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A clean, minimalist developer workstation at night. A mechanical keyboard is dimly lit by the glow of multiple monitors displaying elegant code structures. The scene is atmospheric and professional, with deep blacks and sharp burnt orange neon accents reflecting off the desk surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcjJ_Ea1lXGCZxrYmIq5ZYi1lA67-8o-5SPqkix4-JCfHWHWwBa39ni1-VluEkI_nWTJoUgwdWUmrbFQflo7MsOVykwatsvJPAu74foefo2TGbMigQ9VALbqyYU7xj8C2hIDiDwlh705wGoitIcccyB5ljn1KTZ0yLNRN-KxX0y47DnmqjUkuIGUnwQz70LXXvsGi1T47Dwf5GDvu2h7HGxbaSLj78WLoGse3cYwO5yIOYkPoBOcATZ1TdiM9hP6staYtXNNjoP4cw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute top-4 left-4 px-3 py-1 bg-zinc-800 text-white rounded font-label-sm text-[10px] tracking-widest flex items-center gap-1 border border-white/10">
+<span class="material-symbols-outlined text-[12px]">code</span>
+                            GITHUB
+                        </div>
+<div class="absolute bottom-4 left-4">
+<span class="px-2 py-1 bg-black/60 backdrop-blur-md rounded font-label-sm text-label-sm text-white">4.2k Stars</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline-md text-headline-md mb-2 group-hover:text-primary transition-colors">FastAPI Enterprise Boilerplate</h3>
+<div class="flex items-center gap-4 mb-4">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-tertiary">signal_cellular_alt</span>
+<span class="font-label-sm text-label-sm">Beginner+</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">fork_left</span>
+<span class="font-label-sm text-label-sm">840 Forks</span>
+</div>
+</div>
+<div class="bg-white/5 border border-white/5 rounded-lg p-3 mb-6">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-label-sm text-label-sm text-primary uppercase">AI Summary</span>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed">Standardized structure for production apps. Covers JWT auth, SQLModel integration, and Docker orchestration.</p>
+</div>
+<button class="w-full py-3 bg-primary-container text-on-primary-container font-bold rounded-lg hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add_circle</span>
+                            Add to Roadmap
+                        </button>
+</div>
+</div>
+<!-- Udemy Resource -->
+<div class="glass-card rounded-xl overflow-hidden group">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="An ethereal digital background showing floating translucent cubes and geometric data structures. The palette is a sophisticated dark theme with glowing orange edges and soft amber particles. It evokes a sense of deep learning and information architectural intelligence, suitable for professional education software." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiHG4tJcTUXax5jgwW7P3T7PDz9akotfqgdig1eDOzyETW8DOD4K3RJ2vueEMKeLQbmh-b5pMl_y8Th5D50uERm02oDQeGmEWJJ6RfN4Zfag2WzXzF2ILZzkk2_5q_K9tbTrqY3eUhtK-c6lZMI_H9uYX_e-5smYXrMjpstZ1JwPybd6LRQqRd5fWLa1wWZdKlmna6HJenMC09w_WWV8CEX956Hy_kh-fZdv_hMw2_RXab39DkfEOj_85bTsSj9GC_VGOzWyjHAhK2"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute top-4 left-4 px-3 py-1 bg-[#A435F0] text-white rounded font-label-sm text-[10px] tracking-widest flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">smart_display</span>
+                            UDEMY
+                        </div>
+<div class="absolute bottom-4 left-4">
+<span class="px-2 py-1 bg-black/60 backdrop-blur-md rounded font-label-sm text-label-sm text-white">28 Hours</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline-md text-headline-md mb-2 group-hover:text-primary transition-colors">UI/UX Design for SaaS</h3>
+<div class="flex items-center gap-4 mb-4">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-secondary">signal_cellular_alt</span>
+<span class="font-label-sm text-label-sm">All Levels</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">thumb_up</span>
+<span class="font-label-sm text-label-sm">98% Positive</span>
+</div>
+</div>
+<div class="bg-white/5 border border-white/5 rounded-lg p-3 mb-6">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-label-sm text-label-sm text-primary uppercase">AI Summary</span>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed">Practical guide to high-conversion dashboards. Focuses on typography, color theory, and user journey optimization.</p>
+</div>
+<button class="w-full py-3 bg-primary-container text-on-primary-container font-bold rounded-lg hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add_circle</span>
+                            Add to Roadmap
+                        </button>
+</div>
+</div>
+<!-- Another YouTube Resource -->
+<div class="glass-card rounded-xl overflow-hidden group">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Close-up of a high-tech processor with glowing orange circuits against a deep obsidian background. Macro photography style showing the intricate detail of futuristic hardware components. The mood is powerful, industrial, and cutting-edge, capturing the essence of technical AI development and hardware acceleration." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKylNksJDK2_FnwISBfwCN2re87pse0-9_Avc1eqsi5Ku6vwa67tb3EPQLorCEfu83xCFw0rDZ9URl_Syzr_8XsHJQEM6l8dUp-SfYsj-JParmD2Or2zdVqtkAgzzQwUKB9iSISLTPNTxCEB8A_cOTONQfYbI8OonihlvvvUND1V_FwzynxcTmAbl9U9GkXe9a8xIzRuFJa2ZdETV9SYiDbwChbrFOOHeidDhj-NkJ13PEhoKxsBXMRzCEDzpRSVo-StaCXVqWXu_x"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute top-4 left-4 px-3 py-1 bg-red-600 text-white rounded font-label-sm text-[10px] tracking-widest flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">play_circle</span>
+                            YOUTUBE
+                        </div>
+<div class="absolute bottom-4 left-4">
+<span class="px-2 py-1 bg-black/60 backdrop-blur-md rounded font-label-sm text-label-sm text-white">1:15:00</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline-md text-headline-md mb-2 group-hover:text-primary transition-colors">NVIDIA CUDA Workshop</h3>
+<div class="flex items-center gap-4 mb-4">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-error">signal_cellular_alt</span>
+<span class="font-label-sm text-label-sm">Expert</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span class="font-label-sm text-label-sm">45k</span>
+</div>
+</div>
+<div class="bg-white/5 border border-white/5 rounded-lg p-3 mb-6">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-label-sm text-label-sm text-primary uppercase">AI Summary</span>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed">Direct tutorial on parallel computing. Teaches memory management and optimization for high-performance AI inference.</p>
+</div>
+<button class="w-full py-3 bg-primary-container text-on-primary-container font-bold rounded-lg hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add_circle</span>
+                            Add to Roadmap
+                        </button>
+</div>
+</div>
+<!-- Another Course Resource -->
+<div class="glass-card rounded-xl border-dashed border-primary/30 flex flex-col items-center justify-center p-8 text-center bg-primary/5 hover:bg-primary/10 group cursor-pointer">
+<div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-[32px]">hub</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2">Request AI Scan</h3>
+<p class="text-on-surface-variant text-sm mb-6">Paste a URL from any learning platform to get an instant AI-generated summary and difficulty rating.</p>
+<div class="w-full flex gap-2">
+<input class="flex-1 bg-surface-container border-white/10 rounded-lg text-sm px-4 focus:ring-primary focus:border-primary" placeholder="https://..." type="text"/>
+<button class="px-4 py-2 bg-primary text-on-primary rounded-lg font-bold">Scan</button>
+</div>
+</div>
+</div>
+<!-- Suggested for You Section -->
+<section class="mt-20">
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-headline-md text-headline-md font-bold">Personalized Recommendations</h3>
+<button class="text-primary font-label-md text-label-md flex items-center gap-1 hover:underline">
+                        View Intelligence Report
+                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+<div class="glass-card rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8">
+<div class="w-32 h-32 md:w-48 md:h-48 rounded-2xl bg-gradient-to-br from-primary to-secondary-container p-0.5">
+<div class="w-full h-full bg-background rounded-[14px] flex flex-col items-center justify-center">
+<span class="font-display-lg text-display-lg font-bold text-primary">82%</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Match</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-3 py-1 bg-tertiary-container/20 text-tertiary-fixed-dim border border-tertiary/20 rounded-full font-label-sm text-[10px]">CAREER ALIGNMENT: HIGH</span>
+<span class="px-3 py-1 bg-primary-container/20 text-primary border border-primary/20 rounded-full font-label-sm text-[10px]">SKILL GAP: BRIDGED</span>
+</div>
+<h4 class="font-headline-md text-headline-md font-bold mb-3">Foundations of Distributed Systems</h4>
+<p class="text-on-surface-variant text-body-md mb-6 max-w-2xl">
+                            Based on your goal to become a <span class="text-primary font-bold">Staff Engineer</span>, this MIT open courseware sequence covers the 4 critical concepts you currently lack in your profile. 
+                        </p>
+<div class="flex items-center gap-6">
+<button class="px-8 py-3 bg-primary-container text-on-primary-container font-bold rounded-lg burnt-orange-glow hover:brightness-110 active:scale-95 transition-all">Start Learning Path</button>
+<div class="flex -space-x-3">
+<img class="w-8 h-8 rounded-full border-2 border-background" data-alt="Profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAczjgcTu-ER3_-jyQBXIiW_2S75ICAGPZ-MHpvK4EZq8XppslM_fgLSon4nYBYVynFockVIbvWH7XA_aawsT557Ooj1HcTytkrGeRThW4gK9LxL-4dG1H218UdGn1G1Jn4n80RBquOHlbFQVZUGWiEEZJjPEfzeLAdPb7Qq2y53bpK3qk9kHomuo5Zsvap3kdZA3vXpcPJ16Xwg5JhBlhNRG9bFot-zbvXVUnrd91thsawhd74jLcNq3D3MVFsX-xFwi_0RqKIlnS"/>
+<img class="w-8 h-8 rounded-full border-2 border-background" data-alt="Profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn-cVnfWHLYGtR2GCiuwKq0YILW8dRHAkt7VK2M7IucKhXZfeEKuspvH5XD6cLyjwlQLrik7n_v4007SwXC46GYNiqnZzaKBAv-PECvYJADKc_DXDaECcUcIo74e4SyZR8YSjYjsf9b45Q04IXE9GSQV_okI_eK1HnYjfm35f5yJ0dC0PWSY5mqMtJ3WVSAjxChYc3MpprvgKfw0gIEGXJdhTCMfHvVQYHGsppPOdg1YR9_FGa-71vFzt3muugBbITt6J88P7Z4ybC"/>
+<img class="w-8 h-8 rounded-full border-2 border-background" data-alt="Profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaqEqbjwqXNJzh3eqolZXjAQJoWP7wxZdzOhXQHfD9DCeLqxLNgL0py0gJrACIfkI_R4sRz1ztZOYbVAlwEwZnqPD7Wog_5kECWgOwOPm_KctJojycdKFUX9XYVDzssPvGCpF84GpqLYm11n_D72TU-zm5fKgweeFY2zoD0G_1kOhuUQsFxZrN8u-b5b9YUUyN0xqY9YjGhfoYHWdvysAcaPOaXRvliAwnzStAtE_ovWbxqeVju-cr8j1EfliMB8dxoR4npftw_mvA"/>
+<div class="w-8 h-8 rounded-full border-2 border-background bg-surface-container flex items-center justify-center text-[10px] font-bold text-on-surface-variant">+12 friends</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Floating Action Button (FAB) -->
+<button class="fixed bottom-8 right-8 w-16 h-16 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 group burnt-orange-glow">
+<span class="material-symbols-outlined text-[32px] group-hover:rotate-12 transition-transform" style="font-variation-settings: 'FILL' 1;">add</span>
+<span class="absolute right-20 bg-surface-container text-on-surface px-4 py-2 rounded-lg font-label-md text-label-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-white/5">Quick Add Resource</span>
+</button>
+</main>
+<!-- Bottom Nav for Mobile -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface/90 backdrop-blur-xl border-t border-white/5 px-6 py-4 flex justify-between items-center z-50">
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] uppercase font-bold">Dash</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">library_books</span>
+<span class="text-[10px] uppercase font-bold">Books</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">map</span>
+<span class="text-[10px] uppercase font-bold">Maps</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="text-[10px] uppercase font-bold">Profile</span>
+</button>
+</nav>
+<script>
+        // Micro-interactions and hover effects
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // Add to roadmap animation
+        document.querySelectorAll('button').forEach(btn => {
+            if (btn.innerText.includes('Add to Roadmap')) {
+                btn.addEventListener('click', function() {
+                    const originalContent = this.innerHTML;
+                    this.innerHTML = '<span class="material-symbols-outlined animate-bounce">check_circle</span> Added';
+                    this.classList.remove('bg-primary-container');
+                    this.classList.add('bg-tertiary-container', 'text-on-tertiary-container');
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalContent;
+                        this.classList.add('bg-primary-container');
+                        this.classList.remove('bg-tertiary-container', 'text-on-tertiary-container');
+                    }, 2000);
+                });
+            }
+        });
+    </script>
+</body></html>

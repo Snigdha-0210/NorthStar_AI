@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Memory Hub | MentorAI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(30, 30, 30, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-4px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .neural-glow {
+            box-shadow: 0 0 20px 0 rgba(255, 107, 53, 0.15);
+        }
+        body {
+            background-color: #0A0A0A;
+            color: #e2e2e2;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121212;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333535;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#a98a80",
+                        "secondary-container": "#fbb400",
+                        "on-tertiary": "#003919",
+                        "tertiary-fixed-dim": "#4ae183",
+                        "primary-container": "#ff6b35",
+                        "on-tertiary-fixed": "#00210c",
+                        "tertiary": "#4ae183",
+                        "inverse-surface": "#e2e2e2",
+                        "on-primary": "#5d1900",
+                        "tertiary-fixed": "#6bfe9c",
+                        "surface": "#121414",
+                        "background": "#121414",
+                        "surface-variant": "#333535",
+                        "inverse-primary": "#ab3500",
+                        "tertiary-container": "#00b15c",
+                        "surface-container-low": "#1a1c1c",
+                        "on-secondary": "#422c00",
+                        "on-tertiary-container": "#003b1a",
+                        "primary-fixed-dim": "#ffb59d",
+                        "surface-container-highest": "#333535",
+                        "error-container": "#93000a",
+                        "surface-bright": "#38393a",
+                        "surface-container-high": "#282a2b",
+                        "on-secondary-container": "#694900",
+                        "on-primary-container": "#5f1900",
+                        "surface-container-lowest": "#0c0f0f",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#005228",
+                        "on-background": "#e2e2e2",
+                        "on-secondary-fixed": "#271900",
+                        "surface-tint": "#ffb59d",
+                        "on-primary-fixed": "#390c00",
+                        "inverse-on-surface": "#2f3131",
+                        "on-error": "#690005",
+                        "on-surface": "#e2e2e2",
+                        "outline-variant": "#594139",
+                        "surface-container": "#1e2020",
+                        "error": "#ffb4ab",
+                        "surface-dim": "#121414",
+                        "primary-fixed": "#ffdbd0",
+                        "primary": "#ffb59d",
+                        "on-surface-variant": "#e1bfb5",
+                        "secondary-fixed-dim": "#ffba27",
+                        "on-primary-fixed-variant": "#832600",
+                        "secondary-fixed": "#ffdea9",
+                        "secondary": "#ffd795",
+                        "on-secondary-fixed-variant": "#5e4100"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["JetBrains Mono"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md">
+<!-- Sidebar Navigation -->
+<aside class="h-screen w-64 fixed left-0 top-0 hidden md:flex flex-col bg-surface-container-low border-r border-white/5 py-6 overflow-y-auto">
+<div class="px-6 mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-primary-container">MentorAI</h1>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-60">Career OS</p>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Navigation Items Mapping -->
+<a class="text-on-surface-variant hover:bg-surface-variant/50 px-4 py-3 flex items-center gap-3 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<!-- ACTIVE TAB: Memory Hub -->
+<a class="bg-primary-container/10 text-primary-container border-r-2 border-primary-container px-4 py-3 flex items-center gap-3 translate-x-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">memory</span>
+<span class="font-label-md text-label-md">Memory Hub</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant/50 px-4 py-3 flex items-center gap-3 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-md text-label-md">Career Discovery</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant/50 px-4 py-3 flex items-center gap-3 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-md text-label-md">Roadmaps</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant/50 px-4 py-3 flex items-center gap-3 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">library_books</span>
+<span class="font-label-md text-label-md">Resources</span>
+</a>
+<div class="h-4"></div>
+<a class="text-on-surface-variant hover:bg-surface-variant/50 px-4 py-3 flex items-center gap-3 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Resume Builder</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant/50 px-4 py-3 flex items-center gap-3 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">mic</span>
+<span class="font-label-md text-label-md">Voice Interviews</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant/50 px-4 py-3 flex items-center gap-3 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-label-md text-label-md">AI Mentor</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant/50 px-4 py-3 flex items-center gap-3 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full bg-primary-container text-on-primary-container font-bold py-3 rounded-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">stars</span>
+                Upgrade to Pro
+            </button>
+<div class="mt-6 flex flex-col gap-1">
+<a class="text-on-surface-variant hover:bg-surface-variant/50 px-4 py-2 flex items-center gap-3 rounded text-sm" href="#">
+<span class="material-symbols-outlined text-sm">vpn_key</span> API Keys
+                </a>
+<a class="text-on-surface-variant hover:bg-surface-variant/50 px-4 py-2 flex items-center gap-3 rounded text-sm" href="#">
+<span class="material-symbols-outlined text-sm">help</span> Help
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 min-h-screen relative overflow-hidden">
+<!-- Sticky Top Bar -->
+<header class="sticky top-0 z-50 bg-surface/80 backdrop-blur-xl border-b border-white/5 flex justify-between items-center w-full px-8 h-16">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md text-primary-container font-bold">Memory Hub</span>
+<div class="hidden md:flex bg-surface-container-highest px-3 py-1 rounded-full items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-sm">database</span>
+<span class="font-label-md text-label-md">1.2GB Vector Memory</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden lg:block">
+<input class="bg-surface-container-low border-none rounded-full px-10 py-2 w-64 text-sm focus:ring-1 focus:ring-primary-container" placeholder="Search knowledge graph..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant">search</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary-container">notifications</span>
+<div class="flex items-center gap-3 bg-surface-container rounded-full p-1 pr-4 border border-white/5 cursor-pointer">
+<img alt="User profile with token balance" class="w-8 h-8 rounded-full" data-alt="A professional close-up headshot of a modern software engineer wearing a sleek dark techwear jacket, set against a blurred background of a high-tech obsidian laboratory. The lighting is dramatic and cinematic, with orange and golden rim lights reflecting off the character's face, symbolizing a futuristic personal career assistant interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuClVIe4bkHETmeRTii6KgW-kJZgAntTBdWoBYZ_2AyraB_GpCOtgLyJ9v-_wG0fVlnoPn3OJWumy2UV1WypOr2_7sKjqCcfxd9Wns3g_gmVvtOsr4friOFjxFrlCfsWuYAdgEAFTeAAmziqiHVukWCR6l7figjECOy_ZhAEtQ_QBBpAPEt9CCua9W0I_RPJeppdAM5qaXHcZ_3VOTKq294qWF_yLH76kNYtC2Ewjb1DFUbmCbjnRGWdv6pqsEEwNc8SKEVbVC5sknj2"/>
+<span class="font-label-md text-label-md text-primary-container">840 Tokens</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Content Grid -->
+<div class="max-w-[1440px] mx-auto p-8 space-y-8">
+<!-- Hero Neural Visualization -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 relative h-[400px] rounded-2xl overflow-hidden glass-card neural-glow p-8 flex flex-col justify-end">
+
+<div class="relative z-10 space-y-2">
+<h2 class="font-headline-lg text-headline-lg">Digital Career Twin</h2>
+<p class="text-on-surface-variant max-w-xl font-body-lg">A real-time neural mapping of your professional persona. Your mentor uses this data to customize every interview, roadmap, and resource recommendation.</p>
+<div class="flex gap-4 mt-6">
+<button class="bg-primary-container text-on-primary-container font-bold px-6 py-2 rounded-lg hover:opacity-90">Refresh Snapshot</button>
+<button class="border border-secondary-container text-secondary-container font-bold px-6 py-2 rounded-lg hover:bg-secondary-container/10">Privacy Controls</button>
+</div>
+</div>
+</div>
+<!-- Career Identity Sidecard -->
+<div class="glass-card p-6 rounded-2xl space-y-6">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary-container">fingerprint</span>
+<h3 class="font-headline-md text-headline-md">Career Identity</h3>
+</div>
+<div class="space-y-4">
+<div>
+<label class="font-label-sm text-label-sm text-primary-container block mb-1">LONG-TERM GOAL</label>
+<p class="text-on-surface font-body-md">Principal AI Product Architect at a Tier-1 Tech Firm</p>
+</div>
+<div>
+<label class="font-label-sm text-label-sm text-primary-container block mb-1">CORE VALUES</label>
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-variant px-3 py-1 rounded-full text-xs font-label-md">Scalability</span>
+<span class="bg-surface-variant px-3 py-1 rounded-full text-xs font-label-md">Ethical AI</span>
+<span class="bg-surface-variant px-3 py-1 rounded-full text-xs font-label-md">Mentorship</span>
+</div>
+</div>
+<div>
+<label class="font-label-sm text-label-sm text-primary-container block mb-1">CURRENT TRAJECTORY</label>
+<div class="w-full bg-surface-container-highest h-2 rounded-full mt-2 overflow-hidden">
+<div class="bg-secondary-container h-full w-[68%]" style="box-shadow: 0 0 10px rgba(251, 180, 0, 0.4);"></div>
+</div>
+<p class="text-xs text-on-surface-variant mt-2">68% alignment with Senior goals</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid - Memory Clusters -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Knowledge Graph -->
+<div class="lg:col-span-2 glass-card p-6 rounded-2xl flex flex-col h-full">
+<div class="flex justify-between items-center mb-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container">hub</span>
+<h3 class="font-headline-md text-headline-md">Knowledge Graph</h3>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">open_in_new</span>
+</div>
+<div class="space-y-4 flex-1">
+<div class="flex items-center justify-between p-3 bg-surface-container-lowest rounded-xl border border-white/5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-primary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container">code</span>
+</div>
+<div>
+<p class="font-body-md font-semibold">System Design</p>
+<p class="text-xs text-on-surface-variant">Mastery Level: 8.5/10</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm bg-tertiary-container/20 text-tertiary px-2 py-1 rounded">EXPERT</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container-lowest rounded-xl border border-white/5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-secondary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary-container">psychology</span>
+</div>
+<div>
+<p class="font-body-md font-semibold">Large Language Models</p>
+<p class="text-xs text-on-surface-variant">Mastery Level: 9.2/10</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm bg-tertiary-container/20 text-tertiary px-2 py-1 rounded">VETERAN</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container-lowest rounded-xl border border-white/5 opacity-50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-on-surface-variant/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">architecture</span>
+</div>
+<div>
+<p class="font-body-md font-semibold">Edge Computing</p>
+<p class="text-xs text-on-surface-variant">Last accessed: 4 months ago</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm bg-surface-variant text-on-surface-variant px-2 py-1 rounded">STALE</span>
+</div>
+</div>
+</div>
+<!-- Strengths & Weaknesses (AI Insights) -->
+<div class="glass-card p-6 rounded-2xl border-l-4 border-l-tertiary">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-tertiary">bolt</span>
+<h3 class="font-headline-md text-headline-md">Core Strengths</h3>
+</div>
+<ul class="space-y-4">
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-tertiary text-sm mt-1">check_circle</span>
+<span class="text-on-surface-variant text-sm">Exceptional ability to synthesize technical complex requirements into architectural diagrams.</span>
+</li>
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-tertiary text-sm mt-1">check_circle</span>
+<span class="text-on-surface-variant text-sm">High performance in high-pressure "live-coding" voice environments.</span>
+</li>
+</ul>
+</div>
+<div class="glass-card p-6 rounded-2xl border-l-4 border-l-primary-container">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary-container">warning</span>
+<h3 class="font-headline-md text-headline-md">Development Areas</h3>
+</div>
+<ul class="space-y-4">
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-primary-container text-sm mt-1">arrow_upward</span>
+<span class="text-on-surface-variant text-sm">Business logic prioritization during architectural deep dives is currently underdeveloped.</span>
+</li>
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-primary-container text-sm mt-1">arrow_upward</span>
+<span class="text-on-surface-variant text-sm">Public speaking and stakeholder management scenarios in interviews show 12% stress increase.</span>
+</li>
+</ul>
+</div>
+</section>
+<!-- Bottom Row: History & Resumes -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- Interaction History -->
+<div class="glass-card rounded-2xl overflow-hidden flex flex-col h-[500px]">
+<div class="p-6 border-b border-white/5 flex justify-between items-center bg-surface-container-high/50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container">history_edu</span>
+<h3 class="font-headline-md text-headline-md">Interaction History</h3>
+</div>
+<button class="text-xs font-label-md text-primary-container uppercase tracking-widest hover:underline">Download Archive</button>
+</div>
+<div class="flex-1 overflow-y-auto p-0">
+<div class="hover:bg-white/5 p-6 border-b border-white/5 transition-colors cursor-pointer group">
+<div class="flex justify-between mb-2">
+<span class="font-label-sm text-label-sm text-primary-container">AI MENTOR CHAT • 2H AGO</span>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+</div>
+<h4 class="font-body-md font-bold mb-1">Salary Negotiation Strategy for Senior Role</h4>
+<p class="text-sm text-on-surface-variant line-clamp-2">Discussed BATNA and anchoring strategies. Action item: Research cost-of-living adjustments for San Francisco vs Seattle.</p>
+</div>
+<div class="hover:bg-white/5 p-6 border-b border-white/5 transition-colors cursor-pointer group">
+<div class="flex justify-between mb-2">
+<span class="font-label-sm text-label-sm text-tertiary">MOCK INTERVIEW • YESTERDAY</span>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+</div>
+<h4 class="font-body-md font-bold mb-1">System Design: Scaling a Global Notification Service</h4>
+<p class="text-sm text-on-surface-variant line-clamp-2">Score: 92%. Identified critical flaw in fan-out strategy. AI suggested reviewing message queue persistence patterns.</p>
+</div>
+<div class="hover:bg-white/5 p-6 border-b border-white/5 transition-colors cursor-pointer group">
+<div class="flex justify-between mb-2">
+<span class="font-label-sm text-label-sm text-secondary-container">ROADMAP UPDATE • 3 DAYS AGO</span>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+</div>
+<h4 class="font-body-md font-bold mb-1">New Certification Logged</h4>
+<p class="text-sm text-on-surface-variant line-clamp-2">AWS Solutions Architect - Professional. Memory updated knowledge graph levels and unlocked "Cloud Master" badge.</p>
+</div>
+</div>
+</div>
+<!-- Resume History & Analysis -->
+<div class="glass-card rounded-2xl p-6 h-[500px] flex flex-col">
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-secondary-container">article</span>
+<h3 class="font-headline-md text-headline-md">Resume History</h3>
+</div>
+<div class="grid grid-cols-2 gap-4 flex-1">
+<div class="bg-surface-container-low rounded-xl p-4 border border-white/5 flex flex-col items-center justify-center gap-4 hover:border-primary-container/30 transition-all cursor-pointer group">
+<div class="w-24 h-32 bg-surface-container rounded border-2 border-dashed border-white/10 flex items-center justify-center relative overflow-hidden">
+<span class="material-symbols-outlined text-primary-container text-4xl opacity-50">description</span>
+<div class="absolute inset-0 bg-primary-container/0 group-hover:bg-primary-container/10 transition-colors"></div>
+</div>
+<div class="text-center">
+<p class="font-label-md text-label-md font-bold">Main Resume v4.2</p>
+<p class="text-xs text-on-surface-variant">Active Snapshot</p>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-4 border border-white/5 flex flex-col items-center justify-center gap-4 hover:border-primary-container/30 transition-all cursor-pointer">
+<div class="w-24 h-32 bg-surface-container rounded border border-white/10 flex items-center justify-center opacity-40">
+<span class="material-symbols-outlined text-on-surface-variant text-4xl">description</span>
+</div>
+<div class="text-center opacity-60">
+<p class="font-label-md text-label-md">Main Resume v4.1</p>
+<p class="text-xs text-on-surface-variant">Archived 2 weeks ago</p>
+</div>
+</div>
+<div class="col-span-2 mt-auto p-4 bg-primary-container/5 border border-primary-container/20 rounded-xl flex items-center justify-between">
+<div>
+<h5 class="font-body-md font-bold text-primary-container">AI Insight: Resume Drift</h5>
+<p class="text-sm text-on-surface-variant">Current resume is 22% misaligned with your new Knowledge Graph skills. Recommend update.</p>
+</div>
+<button class="bg-primary-container text-on-primary-container p-2 rounded-lg">
+<span class="material-symbols-outlined">auto_fix_high</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Background Atmospheric Glows -->
+<div class="fixed top-[-10%] right-[-10%] w-[500px] h-[500px] bg-primary-container/5 blur-[120px] rounded-full pointer-events-none"></div>
+<div class="fixed bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-secondary-container/5 blur-[100px] rounded-full pointer-events-none"></div>
+</main>
+<!-- FAB Suppression: Contextual Check -> Hidden on Memory Hub as it is an analytical dashboard -->
+<script>
+        // Micro-interactions and neural effect intensity adjustment
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // Simulating knowledge graph loading
+        window.addEventListener('load', () => {
+            console.log('Neural Career OS initialized...');
+            // In a real app, this would trigger the WebGL shader animation to ramp up
+        });
+    </script>
+</body></html>
