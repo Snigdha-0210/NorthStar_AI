@@ -2,7 +2,7 @@ import os
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
-    PROJECT_NAME: str = "MentorAI"
+    PROJECT_NAME: str = "NorthStar_AI"
     VERSION: str = "1.0.0"
     API_V1_STR: str = "/api"
     
@@ -14,12 +14,20 @@ class Settings(BaseSettings):
     # Database
     DATABASE_URL: str = "sqlite+aiosqlite:///./mentorai.db"
     
-    # ChromaDB
-    CHROMA_HOST: str = "localhost"
-    CHROMA_PORT: int = 8000
+    # Chroma Cloud
+    CHROMA_HOST: str = "api.trychroma.com"
+    CHROMA_TENANT: str = "default_tenant"
+    CHROMA_DATABASE: str = "default_database"
+    CHROMA_API_KEY: str = ""
     
-    # OpenAI
+    # AI APIs
     OPENAI_API_KEY: str = ""
+    GEMINI_API_KEY: str = ""
+    GROQ_API_KEY: str = ""
+    YOUTUBE_API_KEY: str = ""
+    DEEPGRAM_API_KEY: str = ""
+    ELEVENLABS_API_KEY: str = ""
+    GITHUB_TOKEN: str = ""
 
     model_config = SettingsConfigDict(env_file=".env.local", extra="ignore")
 

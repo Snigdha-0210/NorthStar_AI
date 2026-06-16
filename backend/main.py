@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from utils.config import settings
 
 # Import routers
-from api import auth, users, careers
+from api import auth, users, careers, interview
 
 # Configure basic logging
 logging.basicConfig(level=logging.INFO)
@@ -29,13 +29,14 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def startup_event():
-    logger.info("Starting up MentorAI Backend...")
+    logger.info(f"Starting up {settings.PROJECT_NAME} Backend...")
 
 @app.get("/")
 def root():
-    return {"message": "MentorAI API is running."}
+    return {"message": f"{settings.PROJECT_NAME} API is running."}
 
 # Include API Routers
 app.include_router(auth.router, prefix=f"{settings.API_V1_STR}/auth", tags=["Authentication"])
 app.include_router(users.router, prefix=f"{settings.API_V1_STR}/users", tags=["Users"])
 app.include_router(careers.router, prefix=f"{settings.API_V1_STR}/careers", tags=["Careers"])
+app.include_router(interview.router, prefix=f"{settings.API_V1_STR}", tags=["Interview"])
