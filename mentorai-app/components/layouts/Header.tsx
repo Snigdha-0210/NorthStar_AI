@@ -11,10 +11,7 @@ export function Header() {
         <h2 className="font-headline-md text-headline-md text-on-surface">Hello, {user?.name?.split(' ')[0] || 'Guest'} 👋</h2>
       </div>
       <div className="flex items-center gap-6 pr-4 md:pr-0">
-        <div className="hidden lg:flex items-center gap-2 px-3 py-1 bg-surface-container-highest rounded-full border border-white/5">
-          <span className="material-symbols-outlined text-secondary-container text-sm">database</span>
-          <span className="font-label-sm text-label-sm">2,450 Tokens</span>
-        </div>
+
         <div className="flex items-center gap-4">
           <button className="text-on-surface-variant hover:text-primary transition-colors">
             <span className="material-symbols-outlined">notifications</span>

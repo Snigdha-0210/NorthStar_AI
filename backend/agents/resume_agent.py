@@ -21,6 +21,9 @@ resume_agent = Agent(
     model,
     output_type=ResumeFeedback,
     system_prompt=(
+        "IMPORTANT: Output your final response STRICTLY as a JSON object matching the requested schema. "
+        "DO NOT wrap your response in <function> tags or any other XML tags. "
+        "Just use the native JSON tool call format. "
         "You are an expert ATS Resume Analyzer and Career Coach. "
         "Analyze the provided resume text against the target job role. "
         "Provide a strict ATS score, identify missing keywords, and give actionable feedback. "
@@ -44,4 +47,4 @@ async def analyze_resume(resume_text: str, target_role: str) -> ResumeFeedback:
     """
     prompt = f"Target Role: {target_role}\n\nResume Content:\n{resume_text}\n\nPlease analyze this resume."
     result = await resume_agent.run(prompt)
-    return result.data
+    return result.output

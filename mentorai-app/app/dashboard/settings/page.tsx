@@ -44,6 +44,49 @@ export default function SettingsPage() {
           </form>
         </CardContent>
       </Card>
+      <Card className="max-w-2xl mt-6">
+        <CardHeader>
+          <CardTitle>API Configuration</CardTitle>
+          <CardDescription>Update your API keys here if you run out of tokens.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={async (e) => {
+            e.preventDefault();
+            const form = e.target as HTMLFormElement;
+            const groqKey = (form.elements.namedItem("groq") as HTMLInputElement).value;
+            const geminiKey = (form.elements.namedItem("gemini") as HTMLInputElement).value;
+            
+            try {
+              const res = await fetch("http://localhost:8000/api/settings/keys", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  groq_api_key: groqKey || undefined,
+                  gemini_api_key: geminiKey || undefined
+                })
+              });
+              if (res.ok) {
+                toast.success("API keys updated successfully.");
+                form.reset();
+              } else {
+                toast.error("Failed to update API keys.");
+              }
+            } catch (err) {
+              toast.error("Failed to update API keys.");
+            }
+          }} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="groq">Groq API Key</Label>
+              <Input id="groq" type="password" placeholder="gsk_..." />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="gemini">Gemini API Key</Label>
+              <Input id="gemini" type="password" placeholder="AIzaSy..." />
+            </div>
+            <Button type="submit" variant="secondary">Update Keys</Button>
+          </form>
+        </CardContent>
+      </Card>
     </div>
   );
 }

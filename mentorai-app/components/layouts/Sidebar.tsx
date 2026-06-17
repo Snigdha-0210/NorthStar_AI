@@ -9,8 +9,8 @@ const navigation = [
   { name: "Career Discovery", href: "/dashboard/career-discovery", icon: "explore" },
   { name: "Roadmaps", href: "/dashboard/roadmap", icon: "map" },
   { name: "Resources", href: "/dashboard/resources", icon: "library_books" },
-  { name: "Projects", href: "/dashboard/execution", icon: "work" },
-  { name: "Resume Builder", href: "/dashboard/resume-builder", icon: "description" },
+  { name: "Projects", href: "/dashboard/projects", icon: "work" },
+  { name: "Resume Analyzer", href: "/dashboard/resume-analyzer", icon: "plagiarism" },
   { name: "Interview Prep", href: "/dashboard/interview", icon: "record_voice_over" },
   { name: "Agents", href: "/dashboard/multi-agent", icon: "smart_toy" },
 ];

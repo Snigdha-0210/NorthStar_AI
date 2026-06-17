@@ -1,22 +1,50 @@
 import os
+import json
 import httpx
-from fastapi import APIRouter, UploadFile, File, HTTPException
+from typing import Optional, List, Dict, Any
+from fastapi import APIRouter, UploadFile, File, Form, HTTPException, Body
 from fastapi.responses import Response
 from pydantic_ai import Agent
-from pydantic_ai.models.groq import GroqModel
+from pydantic_ai.models.gemini import GeminiModel
+from pydantic import BaseModel, Field
 
 router = APIRouter(prefix="/interview", tags=["interview"])
 
-# Initialize Groq Model for ultra low latency interviewing
-model = GroqModel("llama-3.3-70b-versatile")
+class InterviewScore(BaseModel):
+    overallScore: int = Field(description="Overall performance score from 0 to 100")
+    communicationScore: int = Field(description="Score for clarity and communication from 0 to 100")
+    technicalScore: int = Field(description="Score for technical accuracy from 0 to 100")
+    confidenceScore: int = Field(description="Score for confidence from 0 to 100")
+    feedback: str = Field(description="A detailed paragraph evaluating the candidate, pointing out specific mistakes they made and how to improve.")
+
+model = GeminiModel("gemini-2.5-flash")
+
 interviewer_agent = Agent(
     model,
     system_prompt=(
-        "You are an expert technical interviewer for software engineering roles. "
-        "Keep your responses very concise, engaging, and conversational (1-3 sentences max). "
-        "Act exactly like a human interviewer. Ask follow up questions based on the candidate's answer."
+        "You are an expert, professional technical recruiter conducting a structured mock interview for a software engineering role. "
+        "Your goal is to lead the candidate through a realistic interview. "
+        "Rules: "
+        "1. Ask EXACTLY ONE question at a time. Never ask multiple questions at once. "
+        "2. Keep your responses concise (2-4 sentences max). "
+        "3. Evaluate the candidate's previous answer briefly, provide encouraging but constructive feedback, and then smoothly transition into asking the next question. "
+        "4. Interview Structure: 1) Introduction/Background, 2) Core Technical Concept, 3) Behavioral/Past Experience, 4) Problem Solving scenario, 5) Conclusion. "
+        "5. If there is no conversation history, you must initiate the interview by introducing yourself and asking the first question."
     )
 )
+
+evaluator_agent = Agent(
+    model,
+    output_type=InterviewScore,
+    system_prompt=(
+        "You are an expert technical hiring manager. Your task is to evaluate an interview transcript between an AI Recruiter and a Candidate. "
+        "You must analyze the candidate's responses carefully. Identify their mistakes, lack of depth, or technical inaccuracies. "
+        "Score them fairly from 0 to 100 on multiple criteria. "
+        "Provide a comprehensive feedback paragraph detailing exactly what they did wrong and what they could do better. "
+        "IMPORTANT: Output your final response STRICTLY as a JSON object matching the requested schema."
+    )
+)
+
 
 async def transcribe_audio_deepgram(audio_bytes: bytes) -> str:
     api_key = os.getenv("DEEPGRAM_API_KEY")
@@ -26,13 +54,16 @@ async def transcribe_audio_deepgram(audio_bytes: bytes) -> str:
     url = "https://api.deepgram.com/v1/listen?model=nova-2&smart_format=true"
     headers = {
         "Authorization": f"Token {api_key}",
-        "Content-Type": "audio/webm" # Assumes webm audio from browser
+        "Content-Type": "audio/webm"
     }
     async with httpx.AsyncClient() as client:
         response = await client.post(url, headers=headers, content=audio_bytes, timeout=10.0)
         if response.status_code == 200:
             data = response.json()
-            return data["results"]["channels"][0]["alternatives"][0]["transcript"]
+            try:
+                return data["results"]["channels"][0]["alternatives"][0].get("transcript", "")
+            except (KeyError, IndexError):
+                return ""
         else:
             raise ValueError(f"Deepgram STT failed: {response.text}")
 
@@ -41,7 +72,7 @@ async def generate_speech_elevenlabs(text: str) -> bytes:
     if not api_key:
         raise ValueError("ElevenLabs API Key missing")
         
-    voice_id = "21m00Tcm4TlvDq8ikWAM" # Rachel
+    voice_id = "EXAVITQu4vr4xnSDxMaL" # Bella
     url = f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
     headers = {
         "xi-api-key": api_key,
@@ -49,7 +80,7 @@ async def generate_speech_elevenlabs(text: str) -> bytes:
     }
     payload = {
         "text": text,
-        "model_id": "eleven_monolingual_v1",
+        "model_id": "eleven_multilingual_v2",
         "voice_settings": {"stability": 0.5, "similarity_boost": 0.5}
     }
     async with httpx.AsyncClient() as client:
@@ -60,25 +91,45 @@ async def generate_speech_elevenlabs(text: str) -> bytes:
             raise ValueError(f"ElevenLabs TTS failed: {response.text}")
 
 @router.post("/voice")
-async def process_voice_turn(file: UploadFile = File(...)):
+async def process_voice_turn(
+    file: Optional[UploadFile] = File(None),
+    history: Optional[str] = Form(None)
+):
     """
-    Receives user audio, transcribes with Deepgram, 
-    gets LLM response via Groq, and generates TTS via ElevenLabs.
+    Stateful interview endpoint.
+    If 'file' is None, the AI initiates the conversation.
+    If 'history' is provided, it is injected into the LLM context.
     """
     try:
-        audio_bytes = await file.read()
+        user_text = ""
         
-        # 1. STT (Deepgram)
-        user_text = await transcribe_audio_deepgram(audio_bytes)
-        
-        if not user_text.strip():
-            raise HTTPException(status_code=400, detail="Could not hear any speech.")
+        # 1. Process STT if a file was provided
+        if file is not None:
+            audio_bytes = await file.read()
+            user_text = await transcribe_audio_deepgram(audio_bytes)
+            if not user_text.strip():
+                raise HTTPException(status_code=400, detail="Could not hear any speech.")
 
-        # 2. LLM (Groq via pydantic-ai)
-        result = await interviewer_agent.run(f"Candidate says: {user_text}")
-        interviewer_text = result.data
+        # 2. Prepare Context
+        prompt = ""
+        if history:
+            try:
+                parsed_history = json.loads(history)
+                formatted_history = "\n".join([f"{msg['role'].capitalize()}: {msg['text']}" for msg in parsed_history])
+                prompt += f"Here is the conversation history so far:\n{formatted_history}\n\n"
+            except Exception:
+                pass
         
-        # 3. TTS (ElevenLabs)
+        if user_text:
+            prompt += f"The candidate just said: \"{user_text}\"\n\nEvaluate their answer and ask the next question."
+        else:
+            prompt += "The interview is just starting. Introduce yourself as the AI recruiter and ask the first question (e.g. asking them to introduce themselves)."
+
+        # 3. LLM (Gemini via pydantic-ai)
+        result = await interviewer_agent.run(prompt)
+        interviewer_text = result.output
+        
+        # 4. TTS (ElevenLabs)
         audio_response_bytes = await generate_speech_elevenlabs(interviewer_text)
         
         # Safe encode for headers
@@ -95,4 +146,22 @@ async def process_voice_turn(file: UploadFile = File(...)):
         )
         
     except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/evaluate")
+async def evaluate_interview(history: List[Dict[str, str]] = Body(...)):
+    """
+    Evaluates the full interview transcript and returns a structured score.
+    """
+    try:
+        formatted_history = "\n".join([f"{msg.get('role', 'unknown').capitalize()}: {msg.get('text', '')}" for msg in history])
+        prompt = f"Please evaluate this interview transcript:\n\n{formatted_history}"
+        
+        result = await evaluator_agent.run(prompt)
+        return result.data
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))

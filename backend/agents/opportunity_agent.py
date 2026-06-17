@@ -21,6 +21,9 @@ opportunity_agent = Agent(
     model,
     output_type=OpportunityList,
     system_prompt=(
+        "IMPORTANT: Output your final response STRICTLY as a JSON object matching the requested schema. "
+        "DO NOT wrap your response in <function> tags or any other XML tags. "
+        "Just use the native JSON tool call format. "
         "You are an AI Opportunity Matcher. Based on the user's GitHub activity and skills, "
         "recommend real-world opportunities such as open-source projects, hackathons, or internships. "
         "You have a tool to search for real GitHub 'good first issues' based on the user's skills. "
@@ -74,4 +77,4 @@ async def match_opportunities(user_skills: List[str], github_username: str = Non
 
     prompt = f"User Skills: {user_skills}\n\nRecent GitHub Projects: {github_data}\n\nFind matched opportunities. Use the search_github_issues tool for their top language."
     result = await opportunity_agent.run(prompt)
-    return result.data
+    return result.output

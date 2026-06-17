@@ -15,6 +15,8 @@ class User(Base):
     profile = relationship("Profile", back_populates="user", uselist=False)
     roadmaps = relationship("Roadmap", back_populates="user")
     skills = relationship("Skill", back_populates="user")
+    career_dna = relationship("CareerDNA", back_populates="user", uselist=False)
+    career_matches = relationship("CareerMatch", back_populates="user")
 
 class Profile(Base):
     __tablename__ = "profiles"

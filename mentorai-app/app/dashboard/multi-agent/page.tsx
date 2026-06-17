@@ -5,12 +5,15 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { toast } from "sonner";
 import { Agent } from "@/types";
+import { useRouter } from "next/navigation";
 
 export default function MultiAgentPage() {
   const { agents } = useAppStore();
+  const router = useRouter();
 
   const handleInteract = (agent: Agent) => {
     toast.success(`Started session with ${agent.name}`);
+    router.push(`/dashboard/multi-agent/${agent.id}`);
   };
 
   return (
