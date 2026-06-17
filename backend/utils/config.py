@@ -29,6 +29,6 @@ class Settings(BaseSettings):
     ELEVENLABS_API_KEY: str = ""
     GITHUB_TOKEN: str = ""
 
-    model_config = SettingsConfigDict(env_file=os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env.local"), extra="ignore")
+    model_config = SettingsConfigDict(env_file=os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), ".env.local"), extra="ignore")
 
 settings = Settings()
